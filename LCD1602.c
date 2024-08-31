@@ -24,6 +24,7 @@ void LCD_Write(uchar _dat, bit _RS)
     DelayMs(2);
     RS = _RS;
     CLR_RW;
+    CLR_EN;
     _nop_;
 
     DataPort = _dat;
@@ -34,4 +35,12 @@ void LCD_Write(uchar _dat, bit _RS)
     _nop_;
     _nop_;
     CLR_EN; // EN = 0
+}
+
+void LCD_Init(void)
+{
+    DelayMs(15);
+    LCD_Write(0x38, 0);
+    DelayMs(5);
+    
 }
