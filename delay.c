@@ -1,4 +1,5 @@
-#include <REG52.H>
+#include "delay.h"
+#include <INTRINS.H>
 
 void DelayMs(unsigned int ms)
 {
