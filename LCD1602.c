@@ -4,6 +4,7 @@
  NATSU NO OWARI
 */
 #include "LCD1602.h"
+
 /*
     Name: LCD_Write_Command
     Function: Write command to LCD1602
