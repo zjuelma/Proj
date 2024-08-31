@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\delay.obj" 
+TO ".\Objects\Proj_August_Bme_Chenyu" 
+PRINT(".\Listings\Proj_August_Bme_Chenyu.m51") RAMSIZE(256) 
