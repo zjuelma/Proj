@@ -6,9 +6,11 @@
 #include "LCD1602.h"
 
 /*
-    Name: LCD_Write_Command
-    Function: Write command to LCD1602
-    Parameter: cmd -- the command
+    Name: LCD_Write
+    Function: Write command OR data to LCD1602
+    Parameter:
+        _dat -- the command or the data
+        _RS -- to determine whether to display data or implement instructions
     Additional Descriptions:
         RS = 0->LCD implement instructions
         RS = 1->LCD display data
@@ -16,38 +18,15 @@
         RW = 1->read data FROM LCD
         EN:enable.only when there is a level jump from 0 to 1, can LCD update the data displayed
 */
-void LCD_Write_Command(uchar cmd)
+void LCD_Write(uchar _dat, bit _RS)
 {
-    // RS = 0
-    CLR_RS;
-    // RW = 0
+    // waiting for availability
+    DelayMs(2);
+    RS = _RS;
     CLR_RW;
     _nop_;
 
-    DataPort = cmd;
-    DelayMs(5);
-
-    // send level pulse
-    SET_EN; // EN = 1
-    _nop_;
-    _nop_;
-    CLR_EN; // EN = 0
-}
-
-/*
-    Name: LCD_Write_Data
-    Function: Write Data to LCD1602
-    Parameter: dat -- the data
-*/
-void LCD_Write_Data(uchar dat)
-{
-    // RS = 1
-    SET_RS;
-    // RW = 0
-    CLR_RW;
-    _nop_;
-
-    DataPort = dat;
+    DataPort = _dat;
     DelayMs(5);
 
     // send level pulse

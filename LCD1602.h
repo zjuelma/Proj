@@ -41,11 +41,15 @@ sbit DB7 = P0 ^ 7;
 #define CLR_EN   (EN = 0)
 #define SET_EN   (EN = 1)
 
-// functions
+// Functions
 void LCD_Init(void);
 void LCD_Clear(void);
 void LCD_LocateXY(uchar _X, uchar _Y);
-void LCD_Write_Command(uchar cmd);
-void LCD_Write_Data(uchar dat);
+void LCD_Cursor(uchar _Cursor); // 1 for flickering/ 0 for hiding
+void LCD_Display_Char(char _char);  //display a single character
+void LCD_Display_Num(uchar _num);   //display a single number
+void LCD_Display_Hex(uchar _hex);   //display a single hex
+void LCD_Print(char *_str); //display a string
+void LCD_Roll(char _direction); //Roll the screen: 'R' for right 'L' for left 
 
 #endif
