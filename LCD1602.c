@@ -16,8 +16,9 @@
         RS = 1->LCD display data
         RW = 0->write data TO LCD
         RW = 1->read data FROM LCD
-        EN:enable.only when there is a level jump from 0 to 1, can LCD update the data displayed
+        EN: enable.only when there is a level jump from 0 to 1, can LCD update the data displayed
 */
+
 void LCD_Write(uchar _dat, bit _RS)
 {
     // waiting for availability
@@ -42,5 +43,4 @@ void LCD_Init(void)
     DelayMs(15);
     LCD_Write(0x38, 0);
     DelayMs(5);
-    
 }
