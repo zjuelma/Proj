@@ -186,3 +186,38 @@ void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len)
         divisor /= 10;
     }
 }
+
+/*
+    Name: LCD_Display_LCD_Display_SignedNumber
+    Function: LCD display a signed number
+    Parameter:
+        x: the culumn
+        y: the row
+        _dat: the number
+        _len: the number's length
+*/
+void LCD_Display_SignedNumber(uchar x, uchar y, int _dat, uchar _len)
+{
+    uchar i;
+    uint divisor = 1;
+    uint number;
+
+    LCD_LocateXY(x, y);
+
+    if (_dat < 0) {
+        LCD_Write_Data('-');
+        number = -_dat;
+    } else {
+        number = _dat;
+    }
+
+    for (i = 1; i < _len; i++) {
+        divisor *= 10;
+    }
+
+    for (i = 0; i < _len; i++) {
+        uchar digit = (number / divisor) % 10;
+        LCD_Write_Data(digit + '0');
+        divisor /= 10;
+    }
+}

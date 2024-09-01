@@ -43,13 +43,14 @@ sbit DB7 = P0 ^ 7;
 #define SET_EN   (EN = 1)
 
 // Functions
+void LCD_Write_Command(uchar _cmd, uchar _check);
+void LCD_Write_Data(uchar _dat);
 void LCD_Init(void);
-void LCD_Clear(void);
+void WaitForEnable(void);
 void LCD_LocateXY(uchar _X, uchar _Y);
-void LCD_Display_Char(uchar _X, uchar _Y, uchar _char);           // display a single character
-void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len); // display a single number
-void LCD_Display_Hex(uchar _hex);                                 // display a single hex
-void LCD_Print(char *_str);                                       // display a string
-void LCD_Roll(char _direction);                                   // Roll the screen: 'R' for right 'L' for left
+void LCD_Display_Char(uchar _X, uchar _Y, uchar _char);                // display a single character
+void LCD_Display_String(uchar x, uchar y, uchar *string);              // display a string
+void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len);      // display a single number
+void LCD_Display_SignedNumber(uchar x, uchar y, int _dat, uchar _len); // display a signed number
 
 #endif
