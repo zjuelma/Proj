@@ -86,6 +86,17 @@ void LCD_Init(void)
 }
 
 /*
+    Name: LCD_Clear
+    Function: clear the screen
+    Parameter: void
+*/
+void LCD_Clear(void)
+{
+    LCD_Write_Command(0x01, 1);
+    DelayMs(5);
+}
+
+/*
     Name: WaitForEnable
     Function: wait for lcd1602 being available
     Parameter: void

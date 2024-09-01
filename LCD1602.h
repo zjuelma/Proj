@@ -46,6 +46,7 @@ sbit DB7 = P0 ^ 7;
 void LCD_Write_Command(uchar _cmd, uchar _check);
 void LCD_Write_Data(uchar _dat);
 void LCD_Init(void);
+void LCD_Clear(void);
 void WaitForEnable(void);
 void LCD_LocateXY(uchar _X, uchar _Y);
 void LCD_Display_Char(uchar _X, uchar _Y, uchar _char);                // display a single character
