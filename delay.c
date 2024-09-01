@@ -13,7 +13,7 @@ void DelayMs(unsigned int ms)
 
         // set the initial value
         TH0 = 0xFC;
-        TL0 = 0x17;
+        TL0 = 0x66;
 
         // start the timer
         TR0 = 1;

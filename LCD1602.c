@@ -19,7 +19,7 @@
         EN: enable.only when there is a level jump from 0 to 1, can LCD update the data displayed
 */
 
-void LCD_Write(uchar _dat, bit _RS)
+void LCD_Write(uchar _dat, bit _RS, uchar enable)
 {
     // waiting for availability
     DelayMs(2);
