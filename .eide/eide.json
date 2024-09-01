@@ -15,6 +15,9 @@
           },
           {
             "path": "delay.c"
+          },
+          {
+            "path": "MLX90614.c"
           }
         ],
         "folders": []
@@ -24,6 +27,9 @@
         "files": [
           {
             "path": "delay.h"
+          },
+          {
+            "path": "LCD1602.h"
           }
         ],
         "folders": []
