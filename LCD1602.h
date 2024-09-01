@@ -46,11 +46,10 @@ sbit DB7 = P0 ^ 7;
 void LCD_Init(void);
 void LCD_Clear(void);
 void LCD_LocateXY(uchar _X, uchar _Y);
-void LCD_Cursor(uchar _Cursor);                         // 1 for flickering/ 0 for hiding
-void LCD_Display_Char(uchar _X, uchar _Y, uchar _char); // display a single character
-void LCD_Display_Num(uchar _num);                       // display a single number
-void LCD_Display_Hex(uchar _hex);                       // display a single hex
-void LCD_Print(char *_str);                             // display a string
-void LCD_Roll(char _direction);                         // Roll the screen: 'R' for right 'L' for left
+void LCD_Display_Char(uchar _X, uchar _Y, uchar _char);           // display a single character
+void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len); // display a single number
+void LCD_Display_Hex(uchar _hex);                                 // display a single hex
+void LCD_Print(char *_str);                                       // display a string
+void LCD_Roll(char _direction);                                   // Roll the screen: 'R' for right 'L' for left
 
 #endif

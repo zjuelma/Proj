@@ -144,7 +144,24 @@ void LCD_Display_Char(uchar x, uchar y, uchar _char)
 }
 
 /*
-    Name: LCD_Display_Num
+    Name: LCD_Display_String
+    Function: LCD display a string
+    Parameter:
+        x: the culumn
+        y: the row
+        *string: the string
+*/
+void LCD_Display_String(uchar x, uchar y, uchar *string)
+{
+    uchar i;
+    LCD_LocateXY(x, y);
+    for (i = 0; string[i] != '\0'; i++) {
+        LCD_Write_Data(string[i]);
+    }
+}
+
+/*
+    Name: LCD_Display_Number
     Function: LCD display a number
     Parameter:
         x: the culumn
@@ -152,7 +169,20 @@ void LCD_Display_Char(uchar x, uchar y, uchar _char)
         _dat: the number
         _len: the number's length
 */
-void LCD_Display_Num(uchar x, uchar y, uint _dat, uchar _len)
+void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len)
 {
-    
+    uchar i;
+    uint divisor = 1;
+
+    LCD_LocateXY(x, y);
+
+    for (i = 1; i < _len; i++) {
+        divisor *= 10;
+    }
+
+    for (i = 0; i < _len; i++) {
+        uchar digit = (_dat / divisor) % 10;
+        LCD_Write_Data(digit + '0');
+        divisor /= 10;
+    }
 }
