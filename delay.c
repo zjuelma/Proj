@@ -1,6 +1,11 @@
 #include "delay.h"
 #include <INTRINS.H>
 
+/*
+    Name: DelayMs
+    Function: Delay for ms
+    Parameter: ms -- the total ms you wanna delay
+*/
 void DelayMs(unsigned int ms)
 {
     unsigned int i;
@@ -26,4 +31,21 @@ void DelayMs(unsigned int ms)
         // clear the flag
         TF0 = 0;
     }
+}
+
+/*
+    Name: LCD_Delay1ms
+    Function: delay 1 ms
+    Parameter: none
+*/
+void LCD_Delay1ms(void) //@11.0592MHz
+{
+    unsigned char data i, j;
+
+    _nop_();
+    i = 2;
+    j = 199;
+    do {
+        while (--j);
+    } while (--i);
 }
