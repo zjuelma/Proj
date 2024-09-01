@@ -108,3 +108,51 @@ void WaitForEnable(void)
 
     CLR_EN;
 }
+
+/*
+    Name: LCD_LocateXY
+    Function: locating the display address
+    Parameter:
+        _X: display column
+        _Y: display row
+*/
+void LCD_LocateXY(uchar _X, uchar _Y)
+{
+    uchar temp;
+
+    temp = _X & 0x0F; // preserve the last 4bits of x
+    _Y &= 0x01;       // only preserve the last bit of y
+
+    if (_Y) temp |= 0x40; // if it is on the second row
+    temp |= 0x80;         // When writing the display address, the highest bit D7 is required to be constant at high level 1
+
+    LCD_Write_Command(temp, 1);
+}
+
+/*
+    Name: LCD_Display_Char
+    Function: LCD display a single char
+    Parameter:
+        x: the culumn
+        y: the row
+        _char: the char
+*/
+void LCD_Display_Char(uchar x, uchar y, uchar _char)
+{
+    LCD_LocateXY(x, y);
+    LCD_Write_Data(_char);
+}
+
+/*
+    Name: LCD_Display_Num
+    Function: LCD display a number
+    Parameter:
+        x: the culumn
+        y: the row
+        _dat: the number
+        _len: the number's length
+*/
+void LCD_Display_Num(uchar x, uchar y, uint _dat, uchar _len)
+{
+    
+}
