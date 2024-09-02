@@ -3,5 +3,7 @@
 
 void main(void)
 {
-    DelayMs(1000);
+    DelayMs(500);
+    while (1) {
+    }
 }
