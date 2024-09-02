@@ -36,6 +36,9 @@
           },
           {
             "path": "MLX90614.h"
+          },
+          {
+            "path": "main.h"
           }
         ],
         "folders": []
