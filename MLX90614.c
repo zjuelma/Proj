@@ -77,8 +77,9 @@ void send_bit(void)
 void send_byte(uchar _byte)
 {
     char i, dat;
-    dat               = _byte;
-    int retry_counter = 10;
+    int retry_counter;
+    dat           = _byte;
+    retry_counter = 10;
 
     while (retry_counter > 0) {
         for (i = 0; i < 8; i++) {
@@ -90,8 +91,8 @@ void send_byte(uchar _byte)
         if (bit_in == 0) {
             return;
         }
-        stop_bit();
-        start_bit();
+        I2C_Stop();
+        I2C_Start();
         retry_counter--; // Decrement retry counter
         dat = _byte;     // Reset data for retransmission
     }
