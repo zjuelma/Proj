@@ -61,6 +61,12 @@ void I2C_Stop(void)
     I2C_Delay_Us(5);
 }
 
+/*
+    @author hushmoon
+    @name send_bit
+    @brief send one bit
+    @param void
+*/
 void send_bit(void)
 {
     if (bit_out == 0)
@@ -74,6 +80,12 @@ void send_bit(void)
     I2C_Delay_Us(10);
 }
 
+/*
+    @author hushmoon
+    @name send_byte
+    @brief send one byte
+    @param _byte -- the byte you wanna send
+*/
 void send_byte(uchar _byte)
 {
     char i, dat;
@@ -98,6 +110,12 @@ void send_byte(uchar _byte)
     }
 }
 
+/*
+    @author hushmoon
+    @name receive_bit
+    @brief receive one bit
+    @param void
+*/
 void receive_bit(void)
 {
     SDA    = 1;
@@ -110,6 +128,13 @@ void receive_bit(void)
     I2C_Delay_Us(10);
 }
 
+/*
+    @author hushmoon
+    @name receive_byte
+    @brief receive one byte
+    @param void
+    @return dat -- the byte you received
+*/
 uchar receive_byte(void)
 {
     uchar i, dat;
@@ -124,6 +149,13 @@ uchar receive_byte(void)
     return dat;
 }
 
+/*
+    @author hushmoon
+    @name Rrad_T
+    @brief read temperature through mlx90614
+    @param void
+    @return T -- the temperature you read but in kevin
+*/
 uint Read_T(void)
 {
     I2C_Start();
@@ -142,6 +174,13 @@ uint Read_T(void)
     return (Data_High * 256 + Data_Low);
 }
 
+/*
+    @author hushmoon
+    @name Display_Temperature
+    @brief display the temperature on lcd1602
+    @param void
+    @return none
+*/
 void Display_Temperature(void)
 {
     int temp, T, a, b;
