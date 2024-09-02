@@ -1,5 +1,9 @@
 #include "delay.h"
-#include <INTRINS.H>
+
+/*
+    Tips:
+        1 _nop_() for delaying 2us
+*/
 
 /*
     Name: DelayMs

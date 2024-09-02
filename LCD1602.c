@@ -107,13 +107,13 @@ void WaitForEnable(void)
     DataPort   = 0xFF;
     CLR_RS;
     SET_RW;
-    _nop_;
+    Delay1Us();
     SET_EN;
-    _nop_;
-    _nop_;
+    Delay1Us();
+    Delay1Us();
 
-    while (((DataPIN & 0x80) != 0) && (later < 1000)) {
-        _nop_;
+    while (((DataPort & 0x80) != 0) && (later < 1000)) {
+        Delay1Us();
         later++;
     }
 
