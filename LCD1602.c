@@ -30,6 +30,7 @@ void LCD_Write_Command(uchar _cmd, uchar _check)
     CLR_EN;
     LCD_Delay1ms();
 
+    // prepare command in advance
     DataPort = _cmd;
     LCD_Delay1ms();
 
@@ -56,6 +57,7 @@ void LCD_Write_Data(uchar _dat)
     CLR_EN;
     LCD_Delay1ms();
 
+    // prepare data in advance
     DataPort = _dat;
     LCD_Delay1ms();
 
@@ -74,6 +76,8 @@ void LCD_Write_Data(uchar _dat)
 */
 void LCD_Init(void)
 {
+    // write display-mode setting command
+    // delay for 15ms
     LCD_Write_Command(0x38, 0);
     DelayMs(5);
     LCD_Write_Command(0x38, 0);
@@ -81,11 +85,12 @@ void LCD_Init(void)
     LCD_Write_Command(0x38, 0);
     DelayMs(5);
 
-    LCD_Write_Command(0x38, 1);
-    LCD_Write_Command(0x08, 1);
-    LCD_Write_Command(0x01, 1);
-    LCD_Write_Command(0x06, 1);
-    LCD_Write_Command(0x0C, 1);
+    // check if enable is necessary
+    LCD_Write_Command(0x38, 1); // display mode setting
+    LCD_Write_Command(0x08, 1); // close display
+    LCD_Write_Command(0x01, 1); // clear screen
+    LCD_Write_Command(0x06, 1); // cursor-moving setting
+    LCD_Write_Command(0x0C, 1); // open display
 }
 
 /*
@@ -96,7 +101,7 @@ void LCD_Init(void)
 */
 void LCD_Clear(void)
 {
-    LCD_Write_Command(0x01, 1);
+    LCD_Write_Command(0x01, 1); // clear screen
     DelayMs(5);
 }
 
@@ -109,7 +114,7 @@ void LCD_Clear(void)
 void WaitForEnable(void)
 {
     uint later = 0;
-    DataPort   = 0xFF;
+    DataPort   = 0xFF; // set the port to input
     CLR_RS;
     SET_RW;
     Delay1Us();
@@ -117,6 +122,7 @@ void WaitForEnable(void)
     Delay1Us();
     Delay1Us();
 
+    // waiting for the enable to be 0
     while (((DataPort & 0x80) != 0) && (later < 1000)) {
         Delay1Us();
         later++;
@@ -157,8 +163,8 @@ void LCD_LocateXY(uchar _X, uchar _Y)
 */
 void LCD_Display_Char(uchar x, uchar y, uchar _char)
 {
-    LCD_LocateXY(x, y);
-    LCD_Write_Data(_char);
+    LCD_LocateXY(x, y);    // locate the display address
+    LCD_Write_Data(_char); // display the char
 }
 
 /*
@@ -173,7 +179,9 @@ void LCD_Display_Char(uchar x, uchar y, uchar _char)
 void LCD_Display_String(uchar x, uchar y, uchar *string)
 {
     uchar i;
-    LCD_LocateXY(x, y);
+    LCD_LocateXY(x, y); // locate the display address
+    // display the string
+    // tips:the string is terminated by '\0'
     for (i = 0; string[i] != '\0'; i++) {
         LCD_Write_Data(string[i]);
     }
@@ -202,6 +210,10 @@ void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len)
 
     for (i = 0; i < _len; i++) {
         uchar digit = (_dat / divisor) % 10;
+        /*  display the number
+            tips: the number is displayed in ASCII code
+            we need to plus 0's ASCII code
+         */
         LCD_Write_Data(digit + '0');
         divisor /= 10;
     }
@@ -225,13 +237,13 @@ void LCD_Display_SignedNumber(uchar x, uchar y, int _dat, uchar _len)
 
     LCD_LocateXY(x, y);
 
-    if (_dat < 0) {
+    if (_dat < 0) { // if it is a negative number
         LCD_Write_Data('-');
         number = -_dat;
     } else {
         number = _dat;
     }
-
+    // the same as the LCD_Display_Number below
     for (i = 1; i < _len; i++) {
         divisor *= 10;
     }

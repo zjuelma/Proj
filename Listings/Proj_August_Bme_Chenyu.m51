@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/03/2024  22:29:18  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/04/2024  00:22:03  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -54,30 +54,30 @@ LINK MAP OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
             CODE    0D11H     005AH     UNIT         ?PR?_SEND_BYTE?MLX90614
             CODE    0D6BH     0041H     UNIT         ?PR?LCD_INIT?LCD1602
             CODE    0DACH     003AH     UNIT         ?PR?READ_T?MLX90614
-            CODE    0DE6H     002EH     UNIT         ?PR?CONVERT_T?MLX90614
-            CODE    0E14H     0028H     UNIT         ?PR?WAITFORENABLE?LCD1602
-            CODE    0E3CH     0027H     UNIT         ?PR?_DELAYMS?DELAY
-            CODE    0E63H     0026H     UNIT         ?PR?_LCD_DISPLAY_STRING?LCD1602
-            CODE    0E89H     0025H     UNIT         ?PR?_LCD_WRITE_COMMAND?LCD1602
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 2
+            CODE    0DE6H     0030H     UNIT         ?PR?MAIN?MAIN
+            CODE    0E16H     002EH     UNIT         ?PR?CONVERT_T?MLX90614
+            CODE    0E44H     0028H     UNIT         ?PR?WAITFORENABLE?LCD1602
+            CODE    0E6CH     0027H     UNIT         ?PR?_DELAYMS?DELAY
+            CODE    0E93H     0026H     UNIT         ?PR?_LCD_DISPLAY_STRING?LCD1602
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 2
 
 
-            CODE    0EAEH     0022H     UNIT         ?PR?RECEIVE_BYTE?MLX90614
-            CODE    0ED0H     0020H     UNIT         ?PR?MAIN?MAIN
-            CODE    0EF0H     001EH     UNIT         ?PR?_LCD_WRITE_DATA?LCD1602
-            CODE    0F0EH     001CH     UNIT         ?PR?I2C_START?MLX90614
-            CODE    0F2AH     001CH     UNIT         ?PR?I2C_STOP?MLX90614
-            CODE    0F46H     001CH     UNIT         ?PR?SEND_BIT?MLX90614
-            CODE    0F62H     001BH     UNIT         ?PR?RECEIVE_BIT?MLX90614
-            CODE    0F7DH     0018H     UNIT         ?PR?DISPLAY_MAIN?MAIN
-            CODE    0F95H     0015H     UNIT         ?PR?_LCD_LOCATEXY?LCD1602
-            CODE    0FAAH     000FH     UNIT         ?CO?MAIN
-            CODE    0FB9H     000EH     UNIT         ?PR?LCD_CLEAR?LCD1602
-            CODE    0FC7H     000EH     UNIT         ?PR?_I2C_DELAY_US?MLX90614
-            CODE    0FD5H     000CH     UNIT         ?C_C51STARTUP
-            CODE    0FE1H     000AH     UNIT         ?PR?LCD_DELAY1MS?DELAY
-            CODE    0FEBH     000AH     UNIT         ?PR?_LCD_DISPLAY_CHAR?LCD1602
-            CODE    0FF5H     0003H     UNIT         ?PR?_DELAYUS2X?DELAY
+            CODE    0EB9H     0025H     UNIT         ?PR?_LCD_WRITE_COMMAND?LCD1602
+            CODE    0EDEH     0022H     UNIT         ?PR?RECEIVE_BYTE?MLX90614
+            CODE    0F00H     001EH     UNIT         ?PR?_LCD_WRITE_DATA?LCD1602
+            CODE    0F1EH     001CH     UNIT         ?PR?I2C_START?MLX90614
+            CODE    0F3AH     001CH     UNIT         ?PR?I2C_STOP?MLX90614
+            CODE    0F56H     001CH     UNIT         ?PR?SEND_BIT?MLX90614
+            CODE    0F72H     001BH     UNIT         ?PR?RECEIVE_BIT?MLX90614
+            CODE    0F8DH     0018H     UNIT         ?PR?DISPLAY_MAIN?MAIN
+            CODE    0FA5H     0015H     UNIT         ?PR?_LCD_LOCATEXY?LCD1602
+            CODE    0FBAH     000FH     UNIT         ?CO?MAIN
+            CODE    0FC9H     000EH     UNIT         ?PR?LCD_CLEAR?LCD1602
+            CODE    0FD7H     000EH     UNIT         ?PR?_I2C_DELAY_US?MLX90614
+            CODE    0FE5H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0FF1H     000AH     UNIT         ?PR?LCD_DELAY1MS?DELAY
+            CODE    0FFBH     000AH     UNIT         ?PR?_LCD_DISPLAY_CHAR?LCD1602
+            CODE    1005H     0003H     UNIT         ?PR?_DELAYUS2X?DELAY
 
 
 
@@ -119,7 +119,7 @@ SEGMENT                                         DATA_GROUP
   +--> ?PR?_LCD_LOCATEXY?LCD1602
   +--> ?PR?_LCD_WRITE_DATA?LCD1602
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 3
 
 
 ?PR?_LCD_LOCATEXY?LCD1602                     -----    -----
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 4
 
 
   D:00B0H         PUBLIC        P3
@@ -187,40 +187,47 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0B95H         PUBLIC        Get_Temperature
   D:0026H         PUBLIC        Temp
   D:00B8H         PUBLIC        IP
-  C:0ED0H         PUBLIC        main
+  C:0DE6H         PUBLIC        main
+  B:0090H.2       PUBLIC        SW
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:0F7DH         PUBLIC        Display_Main
+  C:0F8DH         PUBLIC        Display_Main
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          DISPLAY_MAIN
-  C:0F7DH         LINE#         20
-  C:0F7DH         LINE#         21
-  C:0F7DH         LINE#         22
-  C:0F80H         LINE#         23
-  C:0F8CH         LINE#         24
+  C:0F8DH         LINE#         22
+  C:0F8DH         LINE#         23
+  C:0F8DH         LINE#         24
+  C:0F90H         LINE#         25
+  C:0F9CH         LINE#         26
   -------         ENDPROC       DISPLAY_MAIN
   -------         PROC          GET_TEMPERATURE
-  C:0B95H         LINE#         33
-  C:0B95H         LINE#         34
   C:0B95H         LINE#         35
-  C:0B9EH         LINE#         36
-  C:0BBBH         LINE#         37
-  C:0BD8H         LINE#         38
-  C:0BF5H         LINE#         39
-  C:0C12H         LINE#         40
+  C:0B95H         LINE#         36
+  C:0B95H         LINE#         37
+  C:0B9EH         LINE#         38
+  C:0BBBH         LINE#         39
+  C:0BD8H         LINE#         40
+  C:0BF5H         LINE#         41
+  C:0C12H         LINE#         42
   -------         ENDPROC       GET_TEMPERATURE
   -------         PROC          MAIN
-  C:0ED0H         LINE#         43
-  C:0ED0H         LINE#         44
-  C:0ED0H         LINE#         45
-  C:0ED7H         LINE#         46
-  C:0EDAH         LINE#         47
-  C:0EDDH         LINE#         48
-  C:0EDDH         LINE#         49
-  C:0EE4H         LINE#         50
-  C:0EE7H         LINE#         51
-  C:0EEEH         LINE#         52
+  C:0DE6H         LINE#         45
+  C:0DE6H         LINE#         46
+  C:0DE6H         LINE#         47
+  C:0DEDH         LINE#         48
+  C:0DF0H         LINE#         49
+  C:0DF3H         LINE#         50
+  C:0DF3H         LINE#         51
+  C:0DF6H         LINE#         52
+  C:0DFDH         LINE#         53
+  C:0E00H         LINE#         54
+  C:0E07H         LINE#         55
+  C:0E0AH         LINE#         56
+  C:0E0AH         LINE#         57
+  C:0E0AH         LINE#         58
+  C:0E0DH         LINE#         59
+  C:0E14H         LINE#         60
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -230,19 +237,19 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:0E3CH         PUBLIC        _DelayMs
+  C:0E6CH         PUBLIC        _DelayMs
   D:0098H         PUBLIC        SCON
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 5
+
+
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:0FE1H         PUBLIC        LCD_Delay1ms
+  C:0FF1H         PUBLIC        LCD_Delay1ms
   B:0088H.5       PUBLIC        TF0
   D:008CH         PUBLIC        TH0
   D:008AH         PUBLIC        TL0
   B:0088H.4       PUBLIC        TR0
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 5
-
-
-  C:0FF5H         PUBLIC        _DelayUs2x
+  C:1005H         PUBLIC        _DelayUs2x
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          _DELAYMS
@@ -250,41 +257,41 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   -------         DO            
   D:0004H         SYMBOL        i
   -------         ENDDO         
-  C:0E3CH         LINE#         19
-  C:0E3CH         LINE#         20
-  C:0E3CH         LINE#         22
-  C:0E46H         LINE#         25
-  C:0E49H         LINE#         27
-  C:0E4CH         LINE#         30
-  C:0E4FH         LINE#         31
-  C:0E52H         LINE#         34
-  C:0E54H         LINE#         37
-  C:0E57H         LINE#         40
-  C:0E59H         LINE#         42
-  C:0E5BH         LINE#         43
-  C:0E62H         LINE#         44
+  C:0E6CH         LINE#         19
+  C:0E6CH         LINE#         20
+  C:0E6CH         LINE#         22
+  C:0E76H         LINE#         25
+  C:0E79H         LINE#         27
+  C:0E7CH         LINE#         30
+  C:0E7FH         LINE#         31
+  C:0E82H         LINE#         34
+  C:0E84H         LINE#         37
+  C:0E87H         LINE#         40
+  C:0E89H         LINE#         42
+  C:0E8BH         LINE#         43
+  C:0E92H         LINE#         44
   -------         ENDPROC       _DELAYMS
   -------         PROC          LCD_DELAY1MS
   -------         DO            
   D:0007H         SYMBOL        i
   D:0006H         SYMBOL        j
   -------         ENDDO         
-  C:0FE1H         LINE#         52
-  C:0FE1H         LINE#         53
-  C:0FE1H         LINE#         56
-  C:0FE2H         LINE#         57
-  C:0FE4H         LINE#         58
-  C:0FE6H         LINE#         59
-  C:0FE6H         LINE#         60
-  C:0FE8H         LINE#         61
-  C:0FEAH         LINE#         62
+  C:0FF1H         LINE#         52
+  C:0FF1H         LINE#         53
+  C:0FF1H         LINE#         56
+  C:0FF2H         LINE#         57
+  C:0FF4H         LINE#         58
+  C:0FF6H         LINE#         59
+  C:0FF6H         LINE#         60
+  C:0FF8H         LINE#         61
+  C:0FFAH         LINE#         62
   -------         ENDPROC       LCD_DELAY1MS
   -------         PROC          _DELAYUS2X
   D:0007H         SYMBOL        t
-  C:0FF5H         LINE#         70
-  C:0FF5H         LINE#         71
-  C:0FF5H         LINE#         72
-  C:0FF7H         LINE#         73
+  C:1005H         LINE#         70
+  C:1005H         LINE#         71
+  C:1005H         LINE#         72
+  C:1007H         LINE#         73
   -------         ENDPROC       _DELAYUS2X
   -------         ENDMOD        DELAY
 
@@ -292,66 +299,69 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 6
+
+
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:0E14H         PUBLIC        WaitForEnable
+  C:0E44H         PUBLIC        WaitForEnable
   D:00A8H         PUBLIC        IE
   B:00A0H.5       PUBLIC        EN
   D:00B8H         PUBLIC        IP
-  C:0FB9H         PUBLIC        LCD_Clear
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 6
-
-
-  C:0EF0H         PUBLIC        _LCD_Write_Data
+  C:0FC9H         PUBLIC        LCD_Clear
+  C:0F00H         PUBLIC        _LCD_Write_Data
   B:00A0H.7       PUBLIC        RS
   B:00A0H.6       PUBLIC        RW
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   C:0C28H         PUBLIC        _LCD_Display_SignedNumber
-  C:0F95H         PUBLIC        _LCD_LocateXY
+  C:0FA5H         PUBLIC        _LCD_LocateXY
   C:0D6BH         PUBLIC        LCD_Init
   C:0CADH         PUBLIC        _LCD_Display_Number
-  C:0E8DH         PUBLIC        _LCD_Write_Command
+  C:0EBDH         PUBLIC        _LCD_Write_Command
   D:00C8H         PUBLIC        T2CON
-  C:0E63H         PUBLIC        _LCD_Display_String
-  C:0FEBH         PUBLIC        _LCD_Display_Char
+  C:0E93H         PUBLIC        _LCD_Display_String
+  C:0FFBH         PUBLIC        _LCD_Display_Char
   D:00D0H         PUBLIC        PSW
-  C:0E89H         SYMBOL        L?0034
+  C:0EB9H         SYMBOL        L?0034
   -------         PROC          L?0033
   -------         ENDPROC       L?0033
-  C:0E89H         SYMBOL        L?0034
+  C:0EB9H         SYMBOL        L?0034
   -------         PROC          _LCD_WRITE_COMMAND
   D:0025H         SYMBOL        _cmd
   D:0005H         SYMBOL        _check
-  C:0E8DH         LINE#         22
-  C:0E8FH         LINE#         23
-  C:0E8FH         LINE#         26
-  C:0E95H         LINE#         28
-  C:0E97H         LINE#         29
-  C:0E99H         LINE#         30
-  C:0E9BH         LINE#         31
-  C:0E9EH         LINE#         33
-  C:0EA1H         LINE#         34
-  C:0EA4H         LINE#         37
-  C:0EA6H         LINE#         38
-  C:0EA9H         LINE#         39
-  C:0EABH         LINE#         40
+  C:0EBDH         LINE#         22
+  C:0EBFH         LINE#         23
+  C:0EBFH         LINE#         26
+  C:0EC5H         LINE#         28
+  C:0EC7H         LINE#         29
+  C:0EC9H         LINE#         30
+  C:0ECBH         LINE#         31
+  C:0ECEH         LINE#         33
+  C:0ED1H         LINE#         34
+  C:0ED4H         LINE#         37
+  C:0ED6H         LINE#         38
+  C:0ED9H         LINE#         39
+  C:0EDBH         LINE#         40
   -------         ENDPROC       _LCD_WRITE_COMMAND
   -------         PROC          _LCD_WRITE_DATA
   D:0025H         SYMBOL        _dat
-  C:0EF0H         LINE#         49
-  C:0EF2H         LINE#         50
-  C:0EF2H         LINE#         52
-  C:0EF5H         LINE#         54
-  C:0EF7H         LINE#         55
-  C:0EF9H         LINE#         56
-  C:0EFBH         LINE#         57
-  C:0EFEH         LINE#         59
-  C:0F01H         LINE#         60
-  C:0F04H         LINE#         63
-  C:0F06H         LINE#         64
-  C:0F09H         LINE#         65
-  C:0F0BH         LINE#         66
+  C:0F00H         LINE#         49
+  C:0F02H         LINE#         50
+  C:0F02H         LINE#         52
+  C:0F05H         LINE#         54
+  C:0F07H         LINE#         55
+  C:0F09H         LINE#         56
+  C:0F0BH         LINE#         57
+  C:0F0EH         LINE#         59
+  C:0F11H         LINE#         60
+  C:0F14H         LINE#         63
+  C:0F16H         LINE#         64
+  C:0F19H         LINE#         65
+  C:0F1BH         LINE#         66
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 7
+
+
   -------         ENDPROC       _LCD_WRITE_DATA
   -------         PROC          LCD_INIT
   C:0D6BH         LINE#         75
@@ -359,9 +369,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0D6BH         LINE#         77
   C:0D6EH         LINE#         78
   C:0D75H         LINE#         79
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 7
-
-
   C:0D78H         LINE#         80
   C:0D7FH         LINE#         81
   C:0D82H         LINE#         82
@@ -372,31 +379,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0DA5H         LINE#         88
   -------         ENDPROC       LCD_INIT
   -------         PROC          LCD_CLEAR
-  C:0FB9H         LINE#         97
-  C:0FB9H         LINE#         98
-  C:0FB9H         LINE#         99
-  C:0FC0H         LINE#         100
+  C:0FC9H         LINE#         97
+  C:0FC9H         LINE#         98
+  C:0FC9H         LINE#         99
+  C:0FD0H         LINE#         100
   -------         ENDPROC       LCD_CLEAR
   -------         PROC          WAITFORENABLE
   -------         DO            
   D:0006H         SYMBOL        later
   -------         ENDDO         
-  C:0E14H         LINE#         109
-  C:0E14H         LINE#         110
-  C:0E14H         LINE#         111
-  C:0E17H         LINE#         112
-  C:0E1AH         LINE#         113
-  C:0E1CH         LINE#         114
-  C:0E1EH         LINE#         115
-  C:0E1FH         LINE#         116
-  C:0E21H         LINE#         117
-  C:0E22H         LINE#         118
-  C:0E23H         LINE#         120
-  C:0E31H         LINE#         121
-  C:0E32H         LINE#         122
-  C:0E37H         LINE#         123
-  C:0E39H         LINE#         125
-  C:0E3BH         LINE#         126
+  C:0E44H         LINE#         109
+  C:0E44H         LINE#         110
+  C:0E44H         LINE#         111
+  C:0E47H         LINE#         112
+  C:0E4AH         LINE#         113
+  C:0E4CH         LINE#         114
+  C:0E4EH         LINE#         115
+  C:0E4FH         LINE#         116
+  C:0E51H         LINE#         117
+  C:0E52H         LINE#         118
+  C:0E53H         LINE#         120
+  C:0E61H         LINE#         121
+  C:0E62H         LINE#         122
+  C:0E67H         LINE#         123
+  C:0E69H         LINE#         125
+  C:0E6BH         LINE#         126
   -------         ENDPROC       WAITFORENABLE
   -------         PROC          _LCD_LOCATEXY
   D:0007H         SYMBOL        _X
@@ -404,25 +411,25 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   -------         DO            
   D:0007H         SYMBOL        temp
   -------         ENDDO         
-  C:0F95H         LINE#         136
-  C:0F95H         LINE#         137
-  C:0F95H         LINE#         140
-  C:0F99H         LINE#         141
-  C:0F9CH         LINE#         143
-  C:0FA2H         LINE#         144
-  C:0FA5H         LINE#         146
+  C:0FA5H         LINE#         136
+  C:0FA5H         LINE#         137
+  C:0FA5H         LINE#         140
+  C:0FA9H         LINE#         141
+  C:0FACH         LINE#         143
+  C:0FB2H         LINE#         144
+  C:0FB5H         LINE#         146
   -------         ENDPROC       _LCD_LOCATEXY
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 8
+
+
   -------         PROC          _LCD_DISPLAY_CHAR
   D:0007H         SYMBOL        x
   D:0005H         SYMBOL        y
   D:0021H         SYMBOL        _char
-  C:0FEBH         LINE#         158
-  C:0FEDH         LINE#         159
-  C:0FEDH         LINE#         160
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 8
-
-
-  C:0FF0H         LINE#         161
+  C:0FFBH         LINE#         158
+  C:0FFDH         LINE#         159
+  C:0FFDH         LINE#         160
+  C:1000H         LINE#         161
   -------         ENDPROC       _LCD_DISPLAY_CHAR
   -------         PROC          _LCD_DISPLAY_STRING
   D:0007H         SYMBOL        x
@@ -431,13 +438,13 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   -------         DO            
   D:0024H         SYMBOL        i
   -------         ENDDO         
-  C:0E63H         LINE#         173
-  C:0E69H         LINE#         174
-  C:0E69H         LINE#         176
-  C:0E6CH         LINE#         177
-  C:0E81H         LINE#         178
-  C:0E84H         LINE#         179
-  C:0E88H         LINE#         180
+  C:0E93H         LINE#         173
+  C:0E99H         LINE#         174
+  C:0E99H         LINE#         176
+  C:0E9CH         LINE#         177
+  C:0EB1H         LINE#         178
+  C:0EB4H         LINE#         179
+  C:0EB8H         LINE#         180
   -------         ENDPROC       _LCD_DISPLAY_STRING
   -------         PROC          _LCD_DISPLAY_NUMBER
   D:0007H         SYMBOL        x
@@ -472,6 +479,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   D:000CH         SYMBOL        _len
   -------         DO            
   D:000DH         SYMBOL        i
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 9
+
+
   D:000EH         SYMBOL        divisor
   D:0010H         SYMBOL        number
   -------         DO            
@@ -479,9 +489,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   -------         ENDDO         
   -------         ENDDO         
   C:0C28H         LINE#         220
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 9
-
-
   C:0C2CH         LINE#         221
   C:0C2CH         LINE#         223
   C:0C32H         LINE#         226
@@ -505,25 +512,25 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
 
   -------         MODULE        MLX90614
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0EAEH         PUBLIC        receive_byte
+  C:0EDEH         PUBLIC        receive_byte
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:0F62H         PUBLIC        receive_bit
+  C:0F72H         PUBLIC        receive_bit
   D:00A8H         PUBLIC        IE
   D:001CH         PUBLIC        Data_Low
   D:00B8H         PUBLIC        IP
-  C:0DE6H         PUBLIC        Convert_T
+  C:0E16H         PUBLIC        Convert_T
   D:0020H         PUBLIC        flag
-  C:0F0EH         PUBLIC        I2C_Start
+  C:0F1EH         PUBLIC        I2C_Start
   C:0DACH         PUBLIC        Read_T
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:0FC7H         PUBLIC        _I2C_Delay_Us
+  C:0FD7H         PUBLIC        _I2C_Delay_Us
   C:0D11H         PUBLIC        _send_byte
-  C:0F2AH         PUBLIC        I2C_Stop
-  C:0F46H         PUBLIC        send_bit
+  C:0F3AH         PUBLIC        I2C_Stop
+  C:0F56H         PUBLIC        send_bit
   D:001DH         PUBLIC        PEC
   B:0090H.1       PUBLIC        SDA
   D:001EH         PUBLIC        Data_High
@@ -532,53 +539,53 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   B:0020H.0       PUBLIC        bit_in
   B:0020H.7       PUBLIC        bit_out
   D:00D0H         PUBLIC        PSW
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 10
+
+
   -------         PROC          _I2C_DELAY_US
   D:0006H         SYMBOL        us
-  C:0FC7H         LINE#         20
-  C:0FC7H         LINE#         21
-  C:0FC7H         LINE#         22
-  C:0FD1H         LINE#         23
-  C:0FD2H         LINE#         24
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 10
-
-
-  C:0FD4H         LINE#         25
+  C:0FD7H         LINE#         20
+  C:0FD7H         LINE#         21
+  C:0FD7H         LINE#         22
+  C:0FE1H         LINE#         23
+  C:0FE2H         LINE#         24
+  C:0FE4H         LINE#         25
   -------         ENDPROC       _I2C_DELAY_US
   -------         PROC          I2C_START
-  C:0F0EH         LINE#         35
-  C:0F0EH         LINE#         36
-  C:0F0EH         LINE#         37
-  C:0F10H         LINE#         38
-  C:0F15H         LINE#         39
-  C:0F17H         LINE#         40
-  C:0F1CH         LINE#         41
-  C:0F1EH         LINE#         42
-  C:0F23H         LINE#         43
-  C:0F25H         LINE#         44
+  C:0F1EH         LINE#         35
+  C:0F1EH         LINE#         36
+  C:0F1EH         LINE#         37
+  C:0F20H         LINE#         38
+  C:0F25H         LINE#         39
+  C:0F27H         LINE#         40
+  C:0F2CH         LINE#         41
+  C:0F2EH         LINE#         42
+  C:0F33H         LINE#         43
+  C:0F35H         LINE#         44
   -------         ENDPROC       I2C_START
   -------         PROC          I2C_STOP
-  C:0F2AH         LINE#         53
-  C:0F2AH         LINE#         54
-  C:0F2AH         LINE#         55
-  C:0F2CH         LINE#         56
-  C:0F31H         LINE#         57
-  C:0F33H         LINE#         58
-  C:0F38H         LINE#         59
-  C:0F3AH         LINE#         60
-  C:0F3FH         LINE#         61
-  C:0F41H         LINE#         62
+  C:0F3AH         LINE#         53
+  C:0F3AH         LINE#         54
+  C:0F3AH         LINE#         55
+  C:0F3CH         LINE#         56
+  C:0F41H         LINE#         57
+  C:0F43H         LINE#         58
+  C:0F48H         LINE#         59
+  C:0F4AH         LINE#         60
+  C:0F4FH         LINE#         61
+  C:0F51H         LINE#         62
   -------         ENDPROC       I2C_STOP
   -------         PROC          SEND_BIT
-  C:0F46H         LINE#         71
-  C:0F46H         LINE#         72
-  C:0F46H         LINE#         73
-  C:0F49H         LINE#         74
-  C:0F4DH         LINE#         76
-  C:0F4FH         LINE#         77
-  C:0F54H         LINE#         78
-  C:0F56H         LINE#         79
-  C:0F5BH         LINE#         80
-  C:0F5DH         LINE#         81
+  C:0F56H         LINE#         71
+  C:0F56H         LINE#         72
+  C:0F56H         LINE#         73
+  C:0F59H         LINE#         74
+  C:0F5DH         LINE#         76
+  C:0F5FH         LINE#         77
+  C:0F64H         LINE#         78
+  C:0F66H         LINE#         79
+  C:0F6BH         LINE#         80
+  C:0F6DH         LINE#         81
   -------         ENDPROC       SEND_BIT
   -------         PROC          _SEND_BYTE
   D:0021H         SYMBOL        _byte
@@ -592,6 +599,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0D13H         LINE#         94
   C:0D16H         LINE#         95
   C:0D1CH         LINE#         97
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 11
+
+
   C:0D29H         LINE#         98
   C:0D2CH         LINE#         99
   C:0D3DH         LINE#         100
@@ -599,9 +609,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0D46H         LINE#         102
   C:0D51H         LINE#         103
   C:0D54H         LINE#         104
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 11
-
-
   C:0D57H         LINE#         106
   C:0D57H         LINE#         107
   C:0D5AH         LINE#         108
@@ -611,34 +618,34 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0D6AH         LINE#         112
   -------         ENDPROC       _SEND_BYTE
   -------         PROC          RECEIVE_BIT
-  C:0F62H         LINE#         120
-  C:0F62H         LINE#         121
-  C:0F62H         LINE#         122
-  C:0F64H         LINE#         123
-  C:0F66H         LINE#         124
-  C:0F68H         LINE#         125
-  C:0F6DH         LINE#         126
-  C:0F71H         LINE#         127
-  C:0F76H         LINE#         128
-  C:0F78H         LINE#         129
+  C:0F72H         LINE#         120
+  C:0F72H         LINE#         121
+  C:0F72H         LINE#         122
+  C:0F74H         LINE#         123
+  C:0F76H         LINE#         124
+  C:0F78H         LINE#         125
+  C:0F7DH         LINE#         126
+  C:0F81H         LINE#         127
+  C:0F86H         LINE#         128
+  C:0F88H         LINE#         129
   -------         ENDPROC       RECEIVE_BIT
   -------         PROC          RECEIVE_BYTE
   -------         DO            
   D:0021H         SYMBOL        i
   D:0022H         SYMBOL        dat
   -------         ENDDO         
-  C:0EAEH         LINE#         139
-  C:0EAEH         LINE#         140
-  C:0EAEH         LINE#         142
-  C:0EB1H         LINE#         143
-  C:0EB3H         LINE#         144
-  C:0EB9H         LINE#         145
-  C:0EBCH         LINE#         146
-  C:0EBFH         LINE#         147
-  C:0EC1H         LINE#         148
-  C:0ECAH         LINE#         149
-  C:0ECDH         LINE#         150
-  C:0ECFH         LINE#         151
+  C:0EDEH         LINE#         139
+  C:0EDEH         LINE#         140
+  C:0EDEH         LINE#         142
+  C:0EE1H         LINE#         143
+  C:0EE3H         LINE#         144
+  C:0EE9H         LINE#         145
+  C:0EECH         LINE#         146
+  C:0EEFH         LINE#         147
+  C:0EF1H         LINE#         148
+  C:0EFAH         LINE#         149
+  C:0EFDH         LINE#         150
+  C:0EFFH         LINE#         151
   -------         ENDPROC       RECEIVE_BYTE
   -------         PROC          READ_T
   C:0DACH         LINE#         160
@@ -652,6 +659,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0DC3H         LINE#         169
   C:0DC8H         LINE#         170
   C:0DCAH         LINE#         171
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 12
+
+
   C:0DCFH         LINE#         172
   C:0DD1H         LINE#         173
   C:0DD6H         LINE#         174
@@ -659,17 +669,14 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0DE5H         LINE#         176
   -------         ENDPROC       READ_T
   -------         PROC          CONVERT_T
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 12
-
-
   -------         DO            
   D:0006H         SYMBOL        temp
   D:0006H         SYMBOL        T
   -------         ENDDO         
-  C:0DE6H         LINE#         185
-  C:0DE6H         LINE#         186
-  C:0DE6H         LINE#         188
-  C:0DE9H         LINE#         189
+  C:0E16H         LINE#         185
+  C:0E16H         LINE#         186
+  C:0E16H         LINE#         188
+  C:0E19H         LINE#         189
   -------         ENDPROC       CONVERT_T
   -------         ENDMOD        MLX90614
 
@@ -712,6 +719,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
   C:0B87H         PUBLIC        ?C?LNEG
   -------         ENDMOD        ?C?LNEG
 
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/04/2024  00:22:03  PAGE 13
+
+
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCD_DISPLAY_NUMBER?LCD1602
 
@@ -719,14 +729,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\Proj_August_Bme_Chenyu (MAIN)
     SEGMENT: ?PR?_LCD_DISPLAY_SIGNEDNUMBER?LCD1602
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/03/2024  22:29:18  PAGE 13
-
-
     SEGMENT: ?PR?_I2C_DELAY_US?MLX90614
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0457H BYTE (54%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0467H BYTE (55%) *
 ******************************************************************************
 
-Program Size: data=40.0 xdata=0 code=2043
+Program Size: data=40.0 xdata=0 code=2059
 LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

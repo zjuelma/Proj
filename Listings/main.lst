@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/03/2024 22:29:17 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 00:22:02 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -22,52 +22,60 @@ line level    source
   11          
   12          int Temp;
   13          
-  14          /*
-  15              @author hushmoon
-  16              Name: Display_Main
-  17              Function: Display the main interface
-  18              Parameter: void
-  19          */
-  20          void Display_Main(void)
-  21          {
-  22   1          LCD_Clear();
-  23   1          LCD_Display_String(0, 0, "Temp:    .   C");
-  24   1          LCD_Display_Char(12, 0, 0xDF);
-  25   1      }
-  26          
-  27          /*
-  28              @author hushmoon
-  29              Name: Get_Temperature
-  30              Function: Get the temperature and display it
-  31              Parameter: void
-  32          */
-  33          void Get_Temperature(void)
-  34          {
-  35   1          LCD_Display_Char(5, 0, ' ');
-  36   1          LCD_Display_Char(6, 0, Temp / 10000 % 10 + 0x30);
-  37   1          LCD_Display_Char(7, 0, Temp / 1000 % 10 + 0x30);
-  38   1          LCD_Display_Char(8, 0, Temp / 100 % 10 + 0x30);
-  39   1          LCD_Display_Char(10, 0, Temp / 10 % 10 + 0x30);
-  40   1          LCD_Display_Char(11, 0, Temp % 10 + 0x30);
-  41   1      }
-  42          
-  43          void main(void)
-  44          {
-  45   1          DelayMs(100);
-  46   1          LCD_Init();
-  47   1          Display_Main();
-  48   1          while (1) {
-  49   2              Temp = Convert_T();
-  50   2              Get_Temperature();
-  51   2              DelayMs(500);
-  52   2          }
-  53   1      }
-C51 COMPILER V9.60.7.0   MAIN                                                              09/03/2024 22:29:17 PAGE 2   
+  14          sbit SW = P1 ^ 2;
+  15          
+  16          /*
+  17              @author hushmoon
+  18              Name: Display_Main
+  19              Function: Display the main interface
+  20              Parameter: void
+  21          */
+  22          void Display_Main(void)
+  23          {
+  24   1          LCD_Clear();
+  25   1          LCD_Display_String(0, 0, "Temp:    .   C");
+  26   1          LCD_Display_Char(12, 0, 0xDF);
+  27   1      }
+  28          
+  29          /*
+  30              @author hushmoon
+  31              Name: Get_Temperature
+  32              Function: Get the temperature and display it
+  33              Parameter: void
+  34          */
+  35          void Get_Temperature(void)
+  36          {
+  37   1          LCD_Display_Char(5, 0, ' ');
+  38   1          LCD_Display_Char(6, 0, Temp / 10000 % 10 + 0x30);
+  39   1          LCD_Display_Char(7, 0, Temp / 1000 % 10 + 0x30);
+  40   1          LCD_Display_Char(8, 0, Temp / 100 % 10 + 0x30);
+  41   1          LCD_Display_Char(10, 0, Temp / 10 % 10 + 0x30);
+  42   1          LCD_Display_Char(11, 0, Temp % 10 + 0x30);
+  43   1      }
+  44          
+  45          void main(void)
+  46          {
+  47   1          DelayMs(100);
+  48   1          LCD_Init();
+  49   1          Display_Main();
+  50   1          while (1) {
+  51   2              if (SW == 0) {
+  52   3                  DelayMs(20);
+  53   3                  if (SW == 0) {
+C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 00:22:02 PAGE 2   
 
+  54   4                      Temp = Convert_T();
+  55   4                      Get_Temperature();
+  56   4                  }
+  57   3              }
+  58   2              while (SW == 0);
+  59   2              DelayMs(20);
+  60   2          }
+  61   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    203    ----
+   CODE SIZE        =    219    ----
    CONSTANT SIZE    =     15    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
