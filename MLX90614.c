@@ -13,8 +13,9 @@ uchar Data_High, Data_Low, PEC;
 
 /*
     @author hushmoon
-    @brief delay for 1us approximately
-    @param us: how many us you wanna delay
+    Name: I2C_Delay_Us
+    Function: delay for 1us approximately
+    Parameter: us -- the total us you wanna delay
 */
 void I2C_Delay_Us(uint us)
 {
@@ -27,9 +28,9 @@ void I2C_Delay_Us(uint us)
 
 /*
     @author hushmoon
-    @name I2C_Start
-    @brief start bit
-    @param void
+    Name: I2C_Start
+    Function: start bit
+    Parameter: void
 */
 void I2C_Start(void)
 {
@@ -45,9 +46,9 @@ void I2C_Start(void)
 
 /*
     @author hushmoon
-    @name I2C_Stop
-    @brief end bit
-    @param void
+    Name: I2C_Stop
+    Function: end bit
+    Parameter: void
 */
 void I2C_Stop(void)
 {
@@ -63,9 +64,9 @@ void I2C_Stop(void)
 
 /*
     @author hushmoon
-    @name send_bit
-    @brief send one bit
-    @param void
+    Name: send_bit
+    Function: send one bit
+    Parameter: void
 */
 void send_bit(void)
 {
@@ -82,9 +83,9 @@ void send_bit(void)
 
 /*
     @author hushmoon
-    @name send_byte
-    @brief send one byte
-    @param _byte -- the byte you wanna send
+    Name: send_byte
+    Function: send one byte
+    Parameter: _byte -- the byte you wanna send
 */
 void send_byte(uchar _byte)
 {
@@ -112,9 +113,9 @@ void send_byte(uchar _byte)
 
 /*
     @author hushmoon
-    @name receive_bit
-    @brief receive one bit
-    @param void
+    Name: receive_bit
+    Function: receive one bit
+    Parameter: void
 */
 void receive_bit(void)
 {
@@ -130,10 +131,10 @@ void receive_bit(void)
 
 /*
     @author hushmoon
-    @name receive_byte
-    @brief receive one byte
-    @param void
     @return dat -- the byte you received
+    Name: receive_byte
+    Function: receive one byte
+    Parameter: void
 */
 uchar receive_byte(void)
 {
@@ -151,10 +152,10 @@ uchar receive_byte(void)
 
 /*
     @author hushmoon
-    @name Rrad_T
-    @brief read temperature through mlx90614
-    @param void
     @return T -- the temperature you read but in kevin
+    Name: Read_T
+    Function: read temperature through mlx90614
+    Parameter: void
 */
 uint Read_T(void)
 {
@@ -176,10 +177,10 @@ uint Read_T(void)
 
 /*
     @author hushmoon
-    @name Convert_T
-    @brief Convert the temperature from kelvin to celsius
-    @param void
     @return T -- the temperature you read but in celsius
+    Name: Convert_T
+    Function: Convert the temperature from kelvin to celsius
+    Parameter: void
 */
 int Convert_T(void)
 {

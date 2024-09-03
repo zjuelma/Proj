@@ -1,3 +1,8 @@
+/*
+ hushmoon
+ 2024.9.3
+ END
+*/
 #include <REG52.H>
 #include "delay.h"
 #include "LCD1602.h"
@@ -7,7 +12,7 @@
 int Temp;
 
 /*
-    @zjuelma
+    @author hushmoon
     Name: Display_Main
     Function: Display the main interface
     Parameter: void
@@ -20,7 +25,7 @@ void Display_Main(void)
 }
 
 /*
-    @zjuelma
+    @author hushmoon
     Name: Get_Temperature
     Function: Get the temperature and display it
     Parameter: void

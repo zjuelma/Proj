@@ -6,6 +6,7 @@
 #include "LCD1602.h"
 
 /*
+    @author hushmoon
     Name: LCD_Write_Command
     Function: Write command to LCD1602
     Parameter:
@@ -40,6 +41,7 @@ void LCD_Write_Command(uchar _cmd, uchar _check)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Write_Data
     Function: Write data to LCD1602
     Parameter: _dat -- the data
@@ -65,6 +67,7 @@ void LCD_Write_Data(uchar _dat)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Init
     Function: Initializing LCD1602
     Parameter: void
@@ -86,6 +89,7 @@ void LCD_Init(void)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Clear
     Function: clear the screen
     Parameter: void
@@ -97,6 +101,7 @@ void LCD_Clear(void)
 }
 
 /*
+    @author hushmoon
     Name: WaitForEnable
     Function: wait for lcd1602 being available
     Parameter: void
@@ -121,6 +126,7 @@ void WaitForEnable(void)
 }
 
 /*
+    @author hushmoon
     Name: LCD_LocateXY
     Function: locating the display address
     Parameter:
@@ -141,6 +147,7 @@ void LCD_LocateXY(uchar _X, uchar _Y)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Display_Char
     Function: LCD display a single char
     Parameter:
@@ -155,6 +162,7 @@ void LCD_Display_Char(uchar x, uchar y, uchar _char)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Display_String
     Function: LCD display a string
     Parameter:
@@ -172,6 +180,7 @@ void LCD_Display_String(uchar x, uchar y, uchar *string)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Display_Number
     Function: LCD display a number
     Parameter:
@@ -199,6 +208,7 @@ void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Display_LCD_Display_SignedNumber
     Function: LCD display a signed number
     Parameter:

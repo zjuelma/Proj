@@ -19,7 +19,7 @@ void send_bit(void);
 void send_byte(uchar _byte);
 void receive_bit(void);
 uchar receive_byte(void);
-
+// MLX90614
 uint Read_T(void);
 int Convert_T(void);
 

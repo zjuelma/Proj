@@ -1,3 +1,8 @@
+/*
+ hushmoon
+ 2024.9.3
+ END
+*/
 #include "delay.h"
 
 /*
@@ -6,6 +11,7 @@
 */
 
 /*
+    @author hushmoon
     Name: DelayMs
     Function: Delay for ms
     Parameter: ms -- the total ms you wanna delay
@@ -38,6 +44,7 @@ void DelayMs(unsigned int ms)
 }
 
 /*
+    @author hushmoon
     Name: LCD_Delay1ms
     Function: delay 1 ms
     Parameter: none
@@ -55,6 +62,7 @@ void LCD_Delay1ms(void) //@11.0592MHz
 }
 
 /*
+    @author hushmoon
     Name: DelayUs2x
     Function: delay for 2us
     Parameter: t -- the total us you wanna delay
