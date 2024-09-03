@@ -6,6 +6,12 @@
 
 int Temp;
 
+/*
+    @zjuelma
+    Name: Display_Main
+    Function: Display the main interface
+    Parameter: void
+*/
 void Display_Main(void)
 {
     LCD_Clear();
@@ -13,6 +19,12 @@ void Display_Main(void)
     LCD_Display_Char(12, 0, 0xDF);
 }
 
+/*
+    @zjuelma
+    Name: Get_Temperature
+    Function: Get the temperature and display it
+    Parameter: void
+*/
 void Get_Temperature(void)
 {
     LCD_Display_Char(5, 0, ' ');
