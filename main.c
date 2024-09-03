@@ -11,6 +11,8 @@
 
 int Temp;
 
+sbit SW = P1 ^ 2;
+
 /*
     @author hushmoon
     Name: Display_Main
@@ -46,8 +48,14 @@ void main(void)
     LCD_Init();
     Display_Main();
     while (1) {
-        Temp = Convert_T();
-        Get_Temperature();
-        DelayMs(500);
+        if (SW == 0) {
+            DelayMs(20);
+            if (SW == 0) {
+                Temp = Convert_T();
+                Get_Temperature();
+            }
+        }
+        while (SW == 0);
+        DelayMs(20);
     }
 }
