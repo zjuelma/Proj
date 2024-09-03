@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   DELAY                                                             09/03/2024 22:17:08 PAGE 1   
+C51 COMPILER V9.60.7.0   DELAY                                                             09/03/2024 22:29:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DELAY
@@ -8,73 +8,81 @@ COMPILER INVOKED BY: E:\studytools\keil5\C51\BIN\C51.EXE delay.c OPTIMIZE(8,SPEE
 
 line level    source
 
-   1          #include "delay.h"
-   2          
-   3          /*
-   4              Tips:
-   5                  1 _nop_() for delaying 2us
-   6          */
+   1          /*
+   2           hushmoon
+   3           2024.9.3
+   4           END
+   5          */
+   6          #include "delay.h"
    7          
    8          /*
-   9              Name: DelayMs
-  10              Function: Delay for ms
-  11              Parameter: ms -- the total ms you wanna delay
-  12          */
-  13          void DelayMs(unsigned int ms)
-  14          {
-  15   1          unsigned int i;
-  16   1          for (i = 0; i < ms; i++) {
-  17   2              // set the timer mode 1 (16-bits timer)
-  18   2              // eliminate low 4 bits and set the mode to mode 1
-  19   2              TMOD &= 0xF0;
-  20   2              // timer 0 mode 1
-  21   2              TMOD |= 0x01;
-  22   2      
-  23   2              // set the initial value
-  24   2              TH0 = 0xFC;
-  25   2              TL0 = 0x66;
-  26   2      
-  27   2              // start the timer
-  28   2              TR0 = 1;
-  29   2      
-  30   2              // waiting for overflow
-  31   2              while (TF0 == 0);
+   9              Tips:
+  10                  1 _nop_() for delaying 2us
+  11          */
+  12          
+  13          /*
+  14              @author hushmoon
+  15              Name: DelayMs
+  16              Function: Delay for ms
+  17              Parameter: ms -- the total ms you wanna delay
+  18          */
+  19          void DelayMs(unsigned int ms)
+  20          {
+  21   1          unsigned int i;
+  22   1          for (i = 0; i < ms; i++) {
+  23   2              // set the timer mode 1 (16-bits timer)
+  24   2              // eliminate low 4 bits and set the mode to mode 1
+  25   2              TMOD &= 0xF0;
+  26   2              // timer 0 mode 1
+  27   2              TMOD |= 0x01;
+  28   2      
+  29   2              // set the initial value
+  30   2              TH0 = 0xFC;
+  31   2              TL0 = 0x66;
   32   2      
-  33   2              // shut down the timer
-  34   2              TR0 = 0;
-  35   2              // clear the flag
-  36   2              TF0 = 0;
-  37   2          }
-  38   1      }
-  39          
-  40          /*
-  41              Name: LCD_Delay1ms
-  42              Function: delay 1 ms
-  43              Parameter: none
-  44          */
-  45          void LCD_Delay1ms(void) //@11.0592MHz
-  46          {
-  47   1          unsigned char data i, j;
-  48   1      
-  49   1          _nop_();
-  50   1          i = 2;
-  51   1          j = 199;
-  52   1          do {
-  53   2              while (--j);
-  54   2          } while (--i);
-C51 COMPILER V9.60.7.0   DELAY                                                             09/03/2024 22:17:08 PAGE 2   
+  33   2              // start the timer
+  34   2              TR0 = 1;
+  35   2      
+  36   2              // waiting for overflow
+  37   2              while (TF0 == 0);
+  38   2      
+  39   2              // shut down the timer
+  40   2              TR0 = 0;
+  41   2              // clear the flag
+  42   2              TF0 = 0;
+  43   2          }
+  44   1      }
+  45          
+  46          /*
+  47              @author hushmoon
+  48              Name: LCD_Delay1ms
+  49              Function: delay 1 ms
+  50              Parameter: none
+  51          */
+  52          void LCD_Delay1ms(void) //@11.0592MHz
+  53          {
+  54   1          unsigned char data i, j;
+C51 COMPILER V9.60.7.0   DELAY                                                             09/03/2024 22:29:17 PAGE 2   
 
-  55   1      }
-  56          
-  57          /*
-  58              Name: DelayUs2x
-  59              Function: delay for 2us
-  60              Parameter: t -- the total us you wanna delay
-  61          */
-  62          void DelayUs2x(unsigned char t)
-  63          {
-  64   1          while (--t);
-  65   1      }
+  55   1      
+  56   1          _nop_();
+  57   1          i = 2;
+  58   1          j = 199;
+  59   1          do {
+  60   2              while (--j);
+  61   2          } while (--i);
+  62   1      }
+  63          
+  64          /*
+  65              @author hushmoon
+  66              Name: DelayUs2x
+  67              Function: delay for 2us
+  68              Parameter: t -- the total us you wanna delay
+  69          */
+  70          void DelayUs2x(unsigned char t)
+  71          {
+  72   1          while (--t);
+  73   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
