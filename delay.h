@@ -8,5 +8,6 @@
 
 void DelayMs(unsigned int ms);
 void LCD_Delay1ms(void);
+void DelayUs2x(unsigned char t);
 
 #endif

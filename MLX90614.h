@@ -21,6 +21,6 @@ void receive_bit(void);
 uchar receive_byte(void);
 
 uint Read_T(void);
-void Display_Temperature(void);
+int Convert_T(void);
 
 #endif

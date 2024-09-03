@@ -53,3 +53,13 @@ void LCD_Delay1ms(void) //@11.0592MHz
         while (--j);
     } while (--i);
 }
+
+/*
+    Name: DelayUs2x
+    Function: delay for 2us
+    Parameter: t -- the total us you wanna delay
+*/
+void DelayUs2x(unsigned char t)
+{
+    while (--t);
+}

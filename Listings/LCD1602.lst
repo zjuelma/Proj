@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/02/2024 11:33:51 PAGE 1   
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/03/2024 22:17:08 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD1602
@@ -62,7 +62,7 @@ line level    source
   52   1          SET_RS;
   53   1          CLR_RW;
   54   1          CLR_EN;
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/02/2024 11:33:51 PAGE 2   
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/03/2024 22:17:08 PAGE 2   
 
   55   1          LCD_Delay1ms();
   56   1      
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1          while (((DataPort & 0x80) != 0) && (later < 1000)) {
  116   2              Delay1Us();
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/02/2024 11:33:51 PAGE 3   
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/03/2024 22:17:08 PAGE 3   
 
  117   2              later++;
  118   2          }
@@ -190,7 +190,7 @@ line level    source
  175              Name: LCD_Display_Number
  176              Function: LCD display a number
  177              Parameter:
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/02/2024 11:33:51 PAGE 4   
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/03/2024 22:17:08 PAGE 4   
 
  178                  x: the culumn
  179                  y: the row
@@ -254,7 +254,7 @@ line level    source
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    488    ----
    CONSTANT SIZE    =   ----    ----
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/02/2024 11:33:51 PAGE 5   
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/03/2024 22:17:08 PAGE 5   
 
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

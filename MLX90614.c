@@ -34,13 +34,13 @@ void I2C_Delay_Us(uint us)
 void I2C_Start(void)
 {
     SDA = 1;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
     SCL = 1;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
     SDA = 0;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
     SCL = 0;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
 }
 
 /*
@@ -52,13 +52,13 @@ void I2C_Start(void)
 void I2C_Stop(void)
 {
     SCL = 0;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
     SDA = 0;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
     SCL = 1;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
     SDA = 1;
-    I2C_Delay_Us(5);
+    DelayUs2x(4);
 }
 
 /*
@@ -73,11 +73,11 @@ void send_bit(void)
         SDA = 0;
     else
         SDA = 1;
-    Delay1Us();
+    DelayUs2x(1);
     SCL = 1;
-    I2C_Delay_Us(10);
+    DelayUs2x(4);
     SCL = 0;
-    I2C_Delay_Us(10);
+    DelayUs2x(4);
 }
 
 /*
@@ -121,11 +121,11 @@ void receive_bit(void)
     SDA    = 1;
     bit_in = 1;
     SCL    = 1;
-    I2C_Delay_Us(10);
+    DelayUs2x(4);
     bit_in = SDA;
-    I2C_Delay_Us(2);
+    DelayUs2x(2);
     SCL = 0;
-    I2C_Delay_Us(10);
+    DelayUs2x(4);
 }
 
 /*
@@ -159,8 +159,8 @@ uchar receive_byte(void)
 uint Read_T(void)
 {
     I2C_Start();
-    send_byte(0x00);
-    send_byte(0x07);
+    send_byte(0x00); // address
+    send_byte(0x07); // command
 
     I2C_Start();
     send_byte(0x01);
@@ -176,30 +176,15 @@ uint Read_T(void)
 
 /*
     @author hushmoon
-    @name Display_Temperature
-    @brief display the temperature on lcd1602
+    @name Convert_T
+    @brief Convert the temperature from kelvin to celsius
     @param void
-    @return none
+    @return T -- the temperature you read but in celsius
 */
-void Display_Temperature(void)
+int Convert_T(void)
 {
-    int temp, T, a, b;
+    int temp, T;
     temp = Read_T();
-    T    = temp * 2;
-
-    if (T >= 27315) {
-        T = T - 27315;
-        a = T / 100;
-        b = T % 100;
-    } else {
-        T = 27315 - T;
-        a = T / 100;
-        b = T - a * 100;
-        LCD_Display_Char(1, 1, '-');
-    }
-    LCD_Display_Number(1, 2, a, 3);
-    LCD_Display_Char(1, 5, '.');
-    LCD_Display_Number(1, 6, (unsigned long)b % 100, 2);
-    LCD_Display_Char(1, 8, 0xDF);
-    LCD_Display_Char(1, 9, 'C');
+    T    = ((float)temp * 0.02f - 273.15f) * 100;
+    return T;
 }

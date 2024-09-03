@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/02/2024 11:33:52 PAGE 1   
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/03/2024 22:17:08 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MLX90614
@@ -44,13 +44,13 @@ line level    source
   34          void I2C_Start(void)
   35          {
   36   1          SDA = 1;
-  37   1          I2C_Delay_Us(5);
+  37   1          DelayUs2x(4);
   38   1          SCL = 1;
-  39   1          I2C_Delay_Us(5);
+  39   1          DelayUs2x(4);
   40   1          SDA = 0;
-  41   1          I2C_Delay_Us(5);
+  41   1          DelayUs2x(4);
   42   1          SCL = 0;
-  43   1          I2C_Delay_Us(5);
+  43   1          DelayUs2x(4);
   44   1      }
   45          
   46          /*
@@ -62,130 +62,156 @@ line level    source
   52          void I2C_Stop(void)
   53          {
   54   1          SCL = 0;
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/02/2024 11:33:52 PAGE 2   
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/03/2024 22:17:08 PAGE 2   
 
-  55   1          I2C_Delay_Us(5);
+  55   1          DelayUs2x(4);
   56   1          SDA = 0;
-  57   1          I2C_Delay_Us(5);
+  57   1          DelayUs2x(4);
   58   1          SCL = 1;
-  59   1          I2C_Delay_Us(5);
+  59   1          DelayUs2x(4);
   60   1          SDA = 1;
-  61   1          I2C_Delay_Us(5);
+  61   1          DelayUs2x(4);
   62   1      }
   63          
-  64          void send_bit(void)
-  65          {
-  66   1          if (bit_out == 0)
-  67   1              SDA = 0;
-  68   1          else
-  69   1              SDA = 1;
-  70   1          Delay1Us();
-  71   1          SCL = 1;
-  72   1          I2C_Delay_Us(10);
-  73   1          SCL = 0;
-  74   1          I2C_Delay_Us(10);
-  75   1      }
-  76          
-  77          void send_byte(uchar _byte)
-  78          {
-  79   1          char i, dat;
-  80   1          int retry_counter;
-  81   1          dat           = _byte;
-  82   1          retry_counter = 10;
-  83   1      
-  84   1          while (retry_counter > 0) {
-  85   2              for (i = 0; i < 8; i++) {
-  86   3                  bit_out = (dat & 0x80) ? 1 : 0;
-  87   3                  send_bit();
-  88   3                  dat <<= 1;
-  89   3              }
-  90   2              receive_bit();
-  91   2              if (bit_in == 0) {
-  92   3                  return;
-  93   3              }
-  94   2              I2C_Stop();
-  95   2              I2C_Start();
-  96   2              retry_counter--; // Decrement retry counter
-  97   2              dat = _byte;     // Reset data for retransmission
-  98   2          }
-  99   1      }
- 100          
- 101          void receive_bit(void)
- 102          {
- 103   1          SDA    = 1;
- 104   1          bit_in = 1;
- 105   1          SCL    = 1;
- 106   1          I2C_Delay_Us(10);
- 107   1          bit_in = SDA;
- 108   1          I2C_Delay_Us(2);
- 109   1          SCL = 0;
- 110   1          I2C_Delay_Us(10);
+  64          /*
+  65              @author hushmoon
+  66              @name send_bit
+  67              @brief send one bit
+  68              @param void
+  69          */
+  70          void send_bit(void)
+  71          {
+  72   1          if (bit_out == 0)
+  73   1              SDA = 0;
+  74   1          else
+  75   1              SDA = 1;
+  76   1          DelayUs2x(1);
+  77   1          SCL = 1;
+  78   1          DelayUs2x(4);
+  79   1          SCL = 0;
+  80   1          DelayUs2x(4);
+  81   1      }
+  82          
+  83          /*
+  84              @author hushmoon
+  85              @name send_byte
+  86              @brief send one byte
+  87              @param _byte -- the byte you wanna send
+  88          */
+  89          void send_byte(uchar _byte)
+  90          {
+  91   1          char i, dat;
+  92   1          int retry_counter;
+  93   1          dat           = _byte;
+  94   1          retry_counter = 10;
+  95   1      
+  96   1          while (retry_counter > 0) {
+  97   2              for (i = 0; i < 8; i++) {
+  98   3                  bit_out = (dat & 0x80) ? 1 : 0;
+  99   3                  send_bit();
+ 100   3                  dat <<= 1;
+ 101   3              }
+ 102   2              receive_bit();
+ 103   2              if (bit_in == 0) {
+ 104   3                  return;
+ 105   3              }
+ 106   2              I2C_Stop();
+ 107   2              I2C_Start();
+ 108   2              retry_counter--; // Decrement retry counter
+ 109   2              dat = _byte;     // Reset data for retransmission
+ 110   2          }
  111   1      }
  112          
- 113          uchar receive_byte(void)
- 114          {
- 115   1          uchar i, dat;
- 116   1          dat = 0;
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/02/2024 11:33:52 PAGE 3   
+ 113          /*
+ 114              @author hushmoon
+ 115              @name receive_bit
+ 116              @brief receive one bit
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/03/2024 22:17:08 PAGE 3   
 
- 117   1          for (i = 0; i < 8; i++) {
- 118   2              dat = dat << 1;
- 119   2              receive_bit();
- 120   2              if (bit_in == 1)
- 121   2                  dat = dat + 1;
- 122   2          }
- 123   1          send_bit(); // acknowledgement
- 124   1          return dat;
- 125   1      }
- 126          
- 127          uint Read_T(void)
- 128          {
- 129   1          I2C_Start();
- 130   1          send_byte(0x00);
- 131   1          send_byte(0x07);
- 132   1      
- 133   1          I2C_Start();
- 134   1          send_byte(0x01);
- 135   1          bit_out   = 0;
- 136   1          Data_Low  = receive_byte();
- 137   1          bit_out   = 0;
- 138   1          Data_High = receive_byte();
- 139   1          bit_out   = 1;
- 140   1          PEC       = receive_byte();
- 141   1          I2C_Stop();
- 142   1          return (Data_High * 256 + Data_Low);
- 143   1      }
- 144          
- 145          void Display_Temperature(void)
- 146          {
- 147   1          int temp, T, a, b;
- 148   1          temp = Read_T();
- 149   1          T    = temp * 2;
- 150   1      
- 151   1          if (T >= 27315) {
- 152   2              T = T - 27315;
- 153   2              a = T / 100;
- 154   2              b = T % 100;
- 155   2          } else {
- 156   2              T = 27315 - T;
- 157   2              a = T / 100;
- 158   2              b = T - a * 100;
- 159   2              LCD_Display_Char(1, 1, '-');
- 160   2          }
- 161   1          LCD_Display_Number(1, 2, a, 3);
- 162   1          LCD_Display_Char(1, 5, '.');
- 163   1          LCD_Display_Number(1, 6, (unsigned long)b % 100, 2);
- 164   1          LCD_Display_Char(1, 8, 0xDF);
- 165   1          LCD_Display_Char(1, 9, 'C');
- 166   1      }
+ 117              @param void
+ 118          */
+ 119          void receive_bit(void)
+ 120          {
+ 121   1          SDA    = 1;
+ 122   1          bit_in = 1;
+ 123   1          SCL    = 1;
+ 124   1          DelayUs2x(4);
+ 125   1          bit_in = SDA;
+ 126   1          DelayUs2x(2);
+ 127   1          SCL = 0;
+ 128   1          DelayUs2x(4);
+ 129   1      }
+ 130          
+ 131          /*
+ 132              @author hushmoon
+ 133              @name receive_byte
+ 134              @brief receive one byte
+ 135              @param void
+ 136              @return dat -- the byte you received
+ 137          */
+ 138          uchar receive_byte(void)
+ 139          {
+ 140   1          uchar i, dat;
+ 141   1          dat = 0;
+ 142   1          for (i = 0; i < 8; i++) {
+ 143   2              dat = dat << 1;
+ 144   2              receive_bit();
+ 145   2              if (bit_in == 1)
+ 146   2                  dat = dat + 1;
+ 147   2          }
+ 148   1          send_bit(); // acknowledgement
+ 149   1          return dat;
+ 150   1      }
+ 151          
+ 152          /*
+ 153              @author hushmoon
+ 154              @name Rrad_T
+ 155              @brief read temperature through mlx90614
+ 156              @param void
+ 157              @return T -- the temperature you read but in kevin
+ 158          */
+ 159          uint Read_T(void)
+ 160          {
+ 161   1          I2C_Start();
+ 162   1          send_byte(0x00); // address
+ 163   1          send_byte(0x07); // command
+ 164   1      
+ 165   1          I2C_Start();
+ 166   1          send_byte(0x01);
+ 167   1          bit_out   = 0;
+ 168   1          Data_Low  = receive_byte();
+ 169   1          bit_out   = 0;
+ 170   1          Data_High = receive_byte();
+ 171   1          bit_out   = 1;
+ 172   1          PEC       = receive_byte();
+ 173   1          I2C_Stop();
+ 174   1          return (Data_High * 256 + Data_Low);
+ 175   1      }
+ 176          
+ 177          /*
+ 178              @author hushmoon
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/03/2024 22:17:08 PAGE 4   
+
+ 179              @name Convert_T
+ 180              @brief Convert the temperature from kelvin to celsius
+ 181              @param void
+ 182              @return T -- the temperature you read but in celsius
+ 183          */
+ 184          int Convert_T(void)
+ 185          {
+ 186   1          int temp, T;
+ 187   1          temp = Read_T();
+ 188   1          T    = ((float)temp * 0.02f - 273.15f) * 100;
+ 189   1          return T;
+ 190   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    470    ----
+   CODE SIZE        =    353    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      4       8
+   DATA SIZE        =      4       7
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
