@@ -4,7 +4,8 @@
  AKIE NO HAJIME
 */
 #include "MLX90614.h"
-#define COMPENSATION 1.045 // compensation factor
+#define COMPENSATION 1.055 // compensation factor
+
 bdata uchar flag;
 sbit bit_out = flag ^ 7;
 sbit bit_in  = flag ^ 0;
