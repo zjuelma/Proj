@@ -4,7 +4,9 @@
  AKIE NO HAJIME
 */
 #include "MLX90614.h"
-#define COMPENSATION 1.055 // compensation factor
+// slope and intercept are calculated by the linear regression
+#define slope     1.051
+#define intercept 17
 
 bdata uchar flag;
 sbit bit_out = flag ^ 7;
@@ -187,6 +189,6 @@ int Convert_T(void)
 {
     int temp, T;
     temp = Read_T();
-    T    = ((float)temp * 0.02f - 273.15f) * 100 * COMPENSATION;
+    T    = ((float)temp * 0.02f - 273.15f) * 100 * slope + intercept;
     return T;
 }

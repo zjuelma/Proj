@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 14:00:33 PAGE 1   
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 18:00:22 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MLX90614
@@ -15,200 +15,203 @@ line level    source
    5          */
    6          #include "MLX90614.h"
    7          #define COMPENSATION 1.055 // compensation factor
-   8          bdata uchar flag;
-   9          sbit bit_out = flag ^ 7;
-  10          sbit bit_in  = flag ^ 0;
-  11          
-  12          uchar Data_High, Data_Low, PEC;
-  13          
-  14          /*
-  15              @author hushmoon
-  16              Name: I2C_Delay_Us
-  17              Function: delay for 1us approximately
-  18              Parameter: us -- the total us you wanna delay
-  19          */
-  20          void I2C_Delay_Us(uint us)
-  21          {
-  22   1          while (us--) {
-  23   2              Delay1Us();
-  24   2          }
-  25   1      }
-  26          
-  27          // I2C MODULE
-  28          
-  29          /*
-  30              @author hushmoon
-  31              Name: I2C_Start
-  32              Function: start bit
-  33              Parameter: void
-  34          */
-  35          void I2C_Start(void)
-  36          {
-  37   1          SDA = 1;
-  38   1          DelayUs2x(4);
-  39   1          SCL = 1;
-  40   1          DelayUs2x(4);
-  41   1          SDA = 0;
-  42   1          DelayUs2x(4);
-  43   1          SCL = 0;
-  44   1          DelayUs2x(4);
-  45   1      }
-  46          
-  47          /*
-  48              @author hushmoon
-  49              Name: I2C_Stop
-  50              Function: end bit
-  51              Parameter: void
-  52          */
-  53          void I2C_Stop(void)
-  54          {
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 14:00:33 PAGE 2   
+   8          #define slope        1.051
+   9          #define intercept    17
+  10          
+  11          bdata uchar flag;
+  12          sbit bit_out = flag ^ 7;
+  13          sbit bit_in  = flag ^ 0;
+  14          
+  15          uchar Data_High, Data_Low, PEC;
+  16          
+  17          /*
+  18              @author hushmoon
+  19              Name: I2C_Delay_Us
+  20              Function: delay for 1us approximately
+  21              Parameter: us -- the total us you wanna delay
+  22          */
+  23          void I2C_Delay_Us(uint us)
+  24          {
+  25   1          while (us--) {
+  26   2              Delay1Us();
+  27   2          }
+  28   1      }
+  29          
+  30          // I2C MODULE
+  31          
+  32          /*
+  33              @author hushmoon
+  34              Name: I2C_Start
+  35              Function: start bit
+  36              Parameter: void
+  37          */
+  38          void I2C_Start(void)
+  39          {
+  40   1          SDA = 1;
+  41   1          DelayUs2x(4);
+  42   1          SCL = 1;
+  43   1          DelayUs2x(4);
+  44   1          SDA = 0;
+  45   1          DelayUs2x(4);
+  46   1          SCL = 0;
+  47   1          DelayUs2x(4);
+  48   1      }
+  49          
+  50          /*
+  51              @author hushmoon
+  52              Name: I2C_Stop
+  53              Function: end bit
+  54              Parameter: void
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 18:00:22 PAGE 2   
 
-  55   1          SCL = 0;
-  56   1          DelayUs2x(4);
-  57   1          SDA = 0;
-  58   1          DelayUs2x(4);
-  59   1          SCL = 1;
-  60   1          DelayUs2x(4);
-  61   1          SDA = 1;
-  62   1          DelayUs2x(4);
-  63   1      }
-  64          
-  65          /*
-  66              @author hushmoon
-  67              Name: send_bit
-  68              Function: send one bit
-  69              Parameter: void
-  70          */
-  71          void send_bit(void)
-  72          {
-  73   1          if (bit_out == 0)
-  74   1              SDA = 0;
-  75   1          else
-  76   1              SDA = 1;
-  77   1          DelayUs2x(1);
-  78   1          SCL = 1;
-  79   1          DelayUs2x(4);
-  80   1          SCL = 0;
-  81   1          DelayUs2x(4);
-  82   1      }
-  83          
-  84          /*
-  85              @author hushmoon
-  86              Name: send_byte
-  87              Function: send one byte
-  88              Parameter: _byte -- the byte you wanna send
-  89          */
-  90          void send_byte(uchar _byte)
-  91          {
-  92   1          char i, dat;
-  93   1          int retry_counter;
-  94   1          dat           = _byte;
-  95   1          retry_counter = 10;
-  96   1      
-  97   1          while (retry_counter > 0) {
-  98   2              for (i = 0; i < 8; i++) {
-  99   3                  bit_out = (dat & 0x80) ? 1 : 0;
- 100   3                  send_bit();
- 101   3                  dat <<= 1;
- 102   3              }
- 103   2              receive_bit();
- 104   2              if (bit_in == 0) {
- 105   3                  return;
- 106   3              }
- 107   2              I2C_Stop();
- 108   2              I2C_Start();
- 109   2              retry_counter--; // Decrement retry counter
- 110   2              dat = _byte;     // Reset data for retransmission
- 111   2          }
- 112   1      }
- 113          
- 114          /*
- 115              @author hushmoon
- 116              Name: receive_bit
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 14:00:33 PAGE 3   
+  55          */
+  56          void I2C_Stop(void)
+  57          {
+  58   1          SCL = 0;
+  59   1          DelayUs2x(4);
+  60   1          SDA = 0;
+  61   1          DelayUs2x(4);
+  62   1          SCL = 1;
+  63   1          DelayUs2x(4);
+  64   1          SDA = 1;
+  65   1          DelayUs2x(4);
+  66   1      }
+  67          
+  68          /*
+  69              @author hushmoon
+  70              Name: send_bit
+  71              Function: send one bit
+  72              Parameter: void
+  73          */
+  74          void send_bit(void)
+  75          {
+  76   1          if (bit_out == 0)
+  77   1              SDA = 0;
+  78   1          else
+  79   1              SDA = 1;
+  80   1          DelayUs2x(1);
+  81   1          SCL = 1;
+  82   1          DelayUs2x(4);
+  83   1          SCL = 0;
+  84   1          DelayUs2x(4);
+  85   1      }
+  86          
+  87          /*
+  88              @author hushmoon
+  89              Name: send_byte
+  90              Function: send one byte
+  91              Parameter: _byte -- the byte you wanna send
+  92          */
+  93          void send_byte(uchar _byte)
+  94          {
+  95   1          char i, dat;
+  96   1          int retry_counter;
+  97   1          dat           = _byte;
+  98   1          retry_counter = 10;
+  99   1      
+ 100   1          while (retry_counter > 0) {
+ 101   2              for (i = 0; i < 8; i++) {
+ 102   3                  bit_out = (dat & 0x80) ? 1 : 0;
+ 103   3                  send_bit();
+ 104   3                  dat <<= 1;
+ 105   3              }
+ 106   2              receive_bit();
+ 107   2              if (bit_in == 0) {
+ 108   3                  return;
+ 109   3              }
+ 110   2              I2C_Stop();
+ 111   2              I2C_Start();
+ 112   2              retry_counter--; // Decrement retry counter
+ 113   2              dat = _byte;     // Reset data for retransmission
+ 114   2          }
+ 115   1      }
+ 116          
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 18:00:22 PAGE 3   
 
- 117              Function: receive one bit
- 118              Parameter: void
- 119          */
- 120          void receive_bit(void)
- 121          {
- 122   1          SDA    = 1;
- 123   1          bit_in = 1;
- 124   1          SCL    = 1;
- 125   1          DelayUs2x(4);
- 126   1          bit_in = SDA;
- 127   1          DelayUs2x(2);
- 128   1          SCL = 0;
- 129   1          DelayUs2x(4);
- 130   1      }
- 131          
- 132          /*
- 133              @author hushmoon
- 134              @return dat -- the byte you received
- 135              Name: receive_byte
- 136              Function: receive one byte
- 137              Parameter: void
- 138          */
- 139          uchar receive_byte(void)
- 140          {
- 141   1          uchar i, dat;
- 142   1          dat = 0;
- 143   1          for (i = 0; i < 8; i++) {
- 144   2              dat = dat << 1;
- 145   2              receive_bit();
- 146   2              if (bit_in == 1)
- 147   2                  dat = dat + 1;
- 148   2          }
- 149   1          send_bit(); // acknowledgement
- 150   1          return dat;
- 151   1      }
- 152          
- 153          /*
- 154              @author hushmoon
- 155              @return T -- the temperature you read but in kevin
- 156              Name: Read_T
- 157              Function: read temperature through mlx90614
- 158              Parameter: void
- 159          */
- 160          uint Read_T(void)
- 161          {
- 162   1          I2C_Start();
- 163   1          send_byte(0x00); // address
- 164   1          send_byte(0x07); // command
- 165   1      
- 166   1          I2C_Start();
- 167   1          send_byte(0x01);
- 168   1          bit_out   = 0;
- 169   1          Data_Low  = receive_byte();
- 170   1          bit_out   = 0;
- 171   1          Data_High = receive_byte();
- 172   1          bit_out   = 1;
- 173   1          PEC       = receive_byte();
- 174   1          I2C_Stop();
- 175   1          return (Data_High * 256 + Data_Low);
- 176   1      }
- 177          
- 178          /*
-C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 14:00:33 PAGE 4   
+ 117          /*
+ 118              @author hushmoon
+ 119              Name: receive_bit
+ 120              Function: receive one bit
+ 121              Parameter: void
+ 122          */
+ 123          void receive_bit(void)
+ 124          {
+ 125   1          SDA    = 1;
+ 126   1          bit_in = 1;
+ 127   1          SCL    = 1;
+ 128   1          DelayUs2x(4);
+ 129   1          bit_in = SDA;
+ 130   1          DelayUs2x(2);
+ 131   1          SCL = 0;
+ 132   1          DelayUs2x(4);
+ 133   1      }
+ 134          
+ 135          /*
+ 136              @author hushmoon
+ 137              @return dat -- the byte you received
+ 138              Name: receive_byte
+ 139              Function: receive one byte
+ 140              Parameter: void
+ 141          */
+ 142          uchar receive_byte(void)
+ 143          {
+ 144   1          uchar i, dat;
+ 145   1          dat = 0;
+ 146   1          for (i = 0; i < 8; i++) {
+ 147   2              dat = dat << 1;
+ 148   2              receive_bit();
+ 149   2              if (bit_in == 1)
+ 150   2                  dat = dat + 1;
+ 151   2          }
+ 152   1          send_bit(); // acknowledgement
+ 153   1          return dat;
+ 154   1      }
+ 155          
+ 156          /*
+ 157              @author hushmoon
+ 158              @return T -- the temperature you read but in kevin
+ 159              Name: Read_T
+ 160              Function: read temperature through mlx90614
+ 161              Parameter: void
+ 162          */
+ 163          uint Read_T(void)
+ 164          {
+ 165   1          I2C_Start();
+ 166   1          send_byte(0x00); // address
+ 167   1          send_byte(0x07); // command
+ 168   1      
+ 169   1          I2C_Start();
+ 170   1          send_byte(0x01);
+ 171   1          bit_out   = 0;
+ 172   1          Data_Low  = receive_byte();
+ 173   1          bit_out   = 0;
+ 174   1          Data_High = receive_byte();
+ 175   1          bit_out   = 1;
+ 176   1          PEC       = receive_byte();
+ 177   1          I2C_Stop();
+ 178   1          return (Data_High * 256 + Data_Low);
+C51 COMPILER V9.60.7.0   MLX90614                                                          09/04/2024 18:00:22 PAGE 4   
 
- 179              @author hushmoon
- 180              @return T -- the temperature you read but in celsius
- 181              Name: Convert_T
- 182              Function: Convert the temperature from kelvin to celsius
- 183              Parameter: void
- 184          */
- 185          int Convert_T(void)
- 186          {
- 187   1          int temp, T;
- 188   1          temp = Read_T();
- 189   1          T    = ((float)temp * 0.02f - 273.15f) * 100 * COMPENSATION;
- 190   1          return T;
- 191   1      }
+ 179   1      }
+ 180          
+ 181          /*
+ 182              @author hushmoon
+ 183              @return T -- the temperature you read but in celsius
+ 184              Name: Convert_T
+ 185              Function: Convert the temperature from kelvin to celsius
+ 186              Parameter: void
+ 187          */
+ 188          int Convert_T(void)
+ 189          {
+ 190   1          int temp, T;
+ 191   1          temp = Read_T();
+ 192   1          T    = ((float)temp * 0.02f - 273.15f) * 100 * slope + intercept;
+ 193   1          return T;
+ 194   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    354    ----
+   CODE SIZE        =    343    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
