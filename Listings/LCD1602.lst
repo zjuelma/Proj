@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 00:22:03 PAGE 1   
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 13:53:12 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD1602
@@ -40,227 +40,239 @@ line level    source
   30   1          CLR_EN;
   31   1          LCD_Delay1ms();
   32   1      
-  33   1          DataPort = _cmd;
-  34   1          LCD_Delay1ms();
-  35   1      
-  36   1          // send level pulse
-  37   1          SET_EN; // EN = 1
-  38   1          LCD_Delay1ms();
-  39   1          CLR_EN; // EN = 0
-  40   1          LCD_Delay1ms();
-  41   1      }
-  42          
-  43          /*
-  44              @author hushmoon
-  45              Name: LCD_Write_Data
-  46              Function: Write data to LCD1602
-  47              Parameter: _dat -- the data
-  48          */
-  49          void LCD_Write_Data(uchar _dat)
-  50          {
-  51   1          // waiting for availability
-  52   1          WaitForEnable();
-  53   1      
-  54   1          SET_RS;
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 00:22:03 PAGE 2   
+  33   1          // prepare command in advance
+  34   1          DataPort = _cmd;
+  35   1          LCD_Delay1ms();
+  36   1      
+  37   1          // send level pulse
+  38   1          SET_EN; // EN = 1
+  39   1          LCD_Delay1ms();
+  40   1          CLR_EN; // EN = 0
+  41   1          LCD_Delay1ms();
+  42   1      }
+  43          
+  44          /*
+  45              @author hushmoon
+  46              Name: LCD_Write_Data
+  47              Function: Write data to LCD1602
+  48              Parameter: _dat -- the data
+  49          */
+  50          void LCD_Write_Data(uchar _dat)
+  51          {
+  52   1          // waiting for availability
+  53   1          WaitForEnable();
+  54   1      
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 13:53:12 PAGE 2   
 
-  55   1          CLR_RW;
-  56   1          CLR_EN;
-  57   1          LCD_Delay1ms();
-  58   1      
-  59   1          DataPort = _dat;
-  60   1          LCD_Delay1ms();
-  61   1      
-  62   1          // send level pulse
-  63   1          SET_EN; // EN = 1
-  64   1          LCD_Delay1ms();
-  65   1          CLR_EN; // EN = 0
+  55   1          SET_RS;
+  56   1          CLR_RW;
+  57   1          CLR_EN;
+  58   1          LCD_Delay1ms();
+  59   1      
+  60   1          // prepare data in advance
+  61   1          DataPort = _dat;
+  62   1          LCD_Delay1ms();
+  63   1      
+  64   1          // send level pulse
+  65   1          SET_EN; // EN = 1
   66   1          LCD_Delay1ms();
-  67   1      }
-  68          
-  69          /*
-  70              @author hushmoon
-  71              Name: LCD_Init
-  72              Function: Initializing LCD1602
-  73              Parameter: void
-  74          */
-  75          void LCD_Init(void)
-  76          {
-  77   1          LCD_Write_Command(0x38, 0);
-  78   1          DelayMs(5);
-  79   1          LCD_Write_Command(0x38, 0);
-  80   1          DelayMs(5);
+  67   1          CLR_EN; // EN = 0
+  68   1          LCD_Delay1ms();
+  69   1      }
+  70          
+  71          /*
+  72              @author hushmoon
+  73              Name: LCD_Init
+  74              Function: Initializing LCD1602
+  75              Parameter: void
+  76          */
+  77          void LCD_Init(void)
+  78          {
+  79   1          // write display-mode setting command
+  80   1          // delay for 15ms
   81   1          LCD_Write_Command(0x38, 0);
   82   1          DelayMs(5);
-  83   1      
-  84   1          LCD_Write_Command(0x38, 1);
-  85   1          LCD_Write_Command(0x08, 1);
-  86   1          LCD_Write_Command(0x01, 1);
-  87   1          LCD_Write_Command(0x06, 1);
-  88   1          LCD_Write_Command(0x0C, 1);
-  89   1      }
-  90          
-  91          /*
-  92              @author hushmoon
-  93              Name: LCD_Clear
-  94              Function: clear the screen
-  95              Parameter: void
-  96          */
-  97          void LCD_Clear(void)
-  98          {
-  99   1          LCD_Write_Command(0x01, 1);
- 100   1          DelayMs(5);
- 101   1      }
- 102          
- 103          /*
- 104              @author hushmoon
- 105              Name: WaitForEnable
- 106              Function: wait for lcd1602 being available
- 107              Parameter: void
- 108          */
- 109          void WaitForEnable(void)
- 110          {
- 111   1          uint later = 0;
- 112   1          DataPort   = 0xFF;
- 113   1          CLR_RS;
- 114   1          SET_RW;
- 115   1          Delay1Us();
- 116   1          SET_EN;
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 00:22:03 PAGE 3   
+  83   1          LCD_Write_Command(0x38, 0);
+  84   1          DelayMs(5);
+  85   1          LCD_Write_Command(0x38, 0);
+  86   1          DelayMs(5);
+  87   1      
+  88   1          // check if enable is necessary
+  89   1          LCD_Write_Command(0x38, 1); // display mode setting
+  90   1          LCD_Write_Command(0x08, 1); // close display
+  91   1          LCD_Write_Command(0x01, 1); // clear screen
+  92   1          LCD_Write_Command(0x06, 1); // cursor-moving setting
+  93   1          LCD_Write_Command(0x0C, 1); // open display
+  94   1      }
+  95          
+  96          /*
+  97              @author hushmoon
+  98              Name: LCD_Clear
+  99              Function: clear the screen
+ 100              Parameter: void
+ 101          */
+ 102          void LCD_Clear(void)
+ 103          {
+ 104   1          LCD_Write_Command(0x01, 1); // clear screen
+ 105   1          DelayMs(5);
+ 106   1      }
+ 107          
+ 108          /*
+ 109              @author hushmoon
+ 110              Name: WaitForEnable
+ 111              Function: wait for lcd1602 being available
+ 112              Parameter: void
+ 113          */
+ 114          void WaitForEnable(void)
+ 115          {
+ 116   1          uint later = 0;
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 13:53:12 PAGE 3   
 
- 117   1          Delay1Us();
- 118   1          Delay1Us();
- 119   1      
- 120   1          while (((DataPort & 0x80) != 0) && (later < 1000)) {
- 121   2              Delay1Us();
- 122   2              later++;
- 123   2          }
+ 117   1          DataPort   = 0xFF; // set the port to input
+ 118   1          CLR_RS;
+ 119   1          SET_RW;
+ 120   1          Delay1Us();
+ 121   1          SET_EN;
+ 122   1          Delay1Us();
+ 123   1          Delay1Us();
  124   1      
- 125   1          CLR_EN;
- 126   1      }
- 127          
- 128          /*
- 129              @author hushmoon
- 130              Name: LCD_LocateXY
- 131              Function: locating the display address
- 132              Parameter:
- 133                  _X: display column
- 134                  _Y: display row
- 135          */
- 136          void LCD_LocateXY(uchar _X, uchar _Y)
- 137          {
- 138   1          uchar temp;
- 139   1      
- 140   1          temp = _X & 0x0F; // preserve the last 4bits of x
- 141   1          _Y &= 0x01;       // only preserve the last bit of y
- 142   1      
- 143   1          if (_Y) temp |= 0x40; // if it is on the second row
- 144   1          temp |= 0x80;         // When writing the display address, the highest bit D7 is required to be consta
-             -nt at high level 1
+ 125   1          // waiting for the enable to be 0
+ 126   1          while (((DataPort & 0x80) != 0) && (later < 1000)) {
+ 127   2              Delay1Us();
+ 128   2              later++;
+ 129   2          }
+ 130   1      
+ 131   1          CLR_EN;
+ 132   1      }
+ 133          
+ 134          /*
+ 135              @author hushmoon
+ 136              Name: LCD_LocateXY
+ 137              Function: locating the display address
+ 138              Parameter:
+ 139                  _X: display column
+ 140                  _Y: display row
+ 141          */
+ 142          void LCD_LocateXY(uchar _X, uchar _Y)
+ 143          {
+ 144   1          uchar temp;
  145   1      
- 146   1          LCD_Write_Command(temp, 1);
- 147   1      }
- 148          
- 149          /*
- 150              @author hushmoon
- 151              Name: LCD_Display_Char
- 152              Function: LCD display a single char
- 153              Parameter:
- 154                  x: the culumn
- 155                  y: the row
- 156                  _char: the char
- 157          */
- 158          void LCD_Display_Char(uchar x, uchar y, uchar _char)
- 159          {
- 160   1          LCD_LocateXY(x, y);
- 161   1          LCD_Write_Data(_char);
- 162   1      }
- 163          
- 164          /*
- 165              @author hushmoon
- 166              Name: LCD_Display_String
- 167              Function: LCD display a string
- 168              Parameter:
- 169                  x: the culumn
- 170                  y: the row
- 171                  *string: the string
- 172          */
- 173          void LCD_Display_String(uchar x, uchar y, uchar *string)
- 174          {
- 175   1          uchar i;
- 176   1          LCD_LocateXY(x, y);
- 177   1          for (i = 0; string[i] != '\0'; i++) {
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 00:22:03 PAGE 4   
+ 146   1          temp = _X & 0x0F; // preserve the last 4bits of x
+ 147   1          _Y &= 0x01;       // only preserve the last bit of y
+ 148   1      
+ 149   1          if (_Y) temp |= 0x40; // if it is on the second row
+ 150   1          temp |= 0x80;         // When writing the display address, the highest bit D7 is required to be consta
+             -nt at high level 1
+ 151   1      
+ 152   1          LCD_Write_Command(temp, 1);
+ 153   1      }
+ 154          
+ 155          /*
+ 156              @author hushmoon
+ 157              Name: LCD_Display_Char
+ 158              Function: LCD display a single char
+ 159              Parameter:
+ 160                  x: the culumn
+ 161                  y: the row
+ 162                  _char: the char
+ 163          */
+ 164          void LCD_Display_Char(uchar x, uchar y, uchar _char)
+ 165          {
+ 166   1          LCD_LocateXY(x, y);    // locate the display address
+ 167   1          LCD_Write_Data(_char); // display the char
+ 168   1      }
+ 169          
+ 170          /*
+ 171              @author hushmoon
+ 172              Name: LCD_Display_String
+ 173              Function: LCD display a string
+ 174              Parameter:
+ 175                  x: the culumn
+ 176                  y: the row
+ 177                  *string: the string
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 13:53:12 PAGE 4   
 
- 178   2              LCD_Write_Data(string[i]);
- 179   2          }
- 180   1      }
- 181          
- 182          /*
- 183              @author hushmoon
- 184              Name: LCD_Display_Number
- 185              Function: LCD display a number
- 186              Parameter:
- 187                  x: the culumn
- 188                  y: the row
- 189                  _dat: the number
- 190                  _len: the number's length
- 191          */
- 192          void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len)
- 193          {
- 194   1          uchar i;
- 195   1          uint divisor = 1;
- 196   1      
- 197   1          LCD_LocateXY(x, y);
- 198   1      
- 199   1          for (i = 1; i < _len; i++) {
- 200   2              divisor *= 10;
- 201   2          }
- 202   1      
- 203   1          for (i = 0; i < _len; i++) {
- 204   2              uchar digit = (_dat / divisor) % 10;
- 205   2              LCD_Write_Data(digit + '0');
- 206   2              divisor /= 10;
- 207   2          }
- 208   1      }
- 209          
- 210          /*
- 211              @author hushmoon
- 212              Name: LCD_Display_LCD_Display_SignedNumber
- 213              Function: LCD display a signed number
- 214              Parameter:
- 215                  x: the culumn
- 216                  y: the row
- 217                  _dat: the number
- 218                  _len: the number's length
- 219          */
- 220          void LCD_Display_SignedNumber(uchar x, uchar y, int _dat, uchar _len)
- 221          {
- 222   1          uchar i;
- 223   1          uint divisor = 1;
- 224   1          uint number;
- 225   1      
- 226   1          LCD_LocateXY(x, y);
- 227   1      
- 228   1          if (_dat < 0) {
- 229   2              LCD_Write_Data('-');
- 230   2              number = -_dat;
- 231   2          } else {
- 232   2              number = _dat;
- 233   2          }
- 234   1      
- 235   1          for (i = 1; i < _len; i++) {
- 236   2              divisor *= 10;
- 237   2          }
- 238   1      
- 239   1          for (i = 0; i < _len; i++) {
-C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 00:22:03 PAGE 5   
+ 178          */
+ 179          void LCD_Display_String(uchar x, uchar y, uchar *string)
+ 180          {
+ 181   1          uchar i;
+ 182   1          LCD_LocateXY(x, y); // locate the display address
+ 183   1          // display the string
+ 184   1          // tips:the string is terminated by '\0'
+ 185   1          for (i = 0; string[i] != '\0'; i++) {
+ 186   2              LCD_Write_Data(string[i]);
+ 187   2          }
+ 188   1      }
+ 189          
+ 190          /*
+ 191              @author hushmoon
+ 192              Name: LCD_Display_Number
+ 193              Function: LCD display a number
+ 194              Parameter:
+ 195                  x: the culumn
+ 196                  y: the row
+ 197                  _dat: the number
+ 198                  _len: the number's length
+ 199          */
+ 200          void LCD_Display_Number(uchar x, uchar y, uint _dat, uchar _len)
+ 201          {
+ 202   1          uchar i;
+ 203   1          uint divisor = 1;
+ 204   1      
+ 205   1          LCD_LocateXY(x, y);
+ 206   1      
+ 207   1          for (i = 1; i < _len; i++) {
+ 208   2              divisor *= 10;
+ 209   2          }
+ 210   1      
+ 211   1          for (i = 0; i < _len; i++) {
+ 212   2              uchar digit = (_dat / divisor) % 10;
+ 213   2              /*  display the number
+ 214   2                  tips: the number is displayed in ASCII code
+ 215   2                  we need to plus 0's ASCII code
+ 216   2               */
+ 217   2              LCD_Write_Data(digit + '0');
+ 218   2              divisor /= 10;
+ 219   2          }
+ 220   1      }
+ 221          
+ 222          /*
+ 223              @author hushmoon
+ 224              Name: LCD_Display_LCD_Display_SignedNumber
+ 225              Function: LCD display a signed number
+ 226              Parameter:
+ 227                  x: the culumn
+ 228                  y: the row
+ 229                  _dat: the number
+ 230                  _len: the number's length
+ 231          */
+ 232          void LCD_Display_SignedNumber(uchar x, uchar y, int _dat, uchar _len)
+ 233          {
+ 234   1          uchar i;
+ 235   1          uint divisor = 1;
+ 236   1          uint number;
+ 237   1      
+ 238   1          LCD_LocateXY(x, y);
+ 239   1      
+C51 COMPILER V9.60.7.0   LCD1602                                                           09/04/2024 13:53:12 PAGE 5   
 
- 240   2              uchar digit = (number / divisor) % 10;
- 241   2              LCD_Write_Data(digit + '0');
- 242   2              divisor /= 10;
- 243   2          }
- 244   1      }
+ 240   1          if (_dat < 0) { // if it is a negative number
+ 241   2              LCD_Write_Data('-');
+ 242   2              number = -_dat;
+ 243   2          } else {
+ 244   2              number = _dat;
+ 245   2          }
+ 246   1          // the same as the LCD_Display_Number below
+ 247   1          for (i = 1; i < _len; i++) {
+ 248   2              divisor *= 10;
+ 249   2          }
+ 250   1      
+ 251   1          for (i = 0; i < _len; i++) {
+ 252   2              uchar digit = (number / divisor) % 10;
+ 253   2              LCD_Write_Data(digit + '0');
+ 254   2              divisor /= 10;
+ 255   2          }
+ 256   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

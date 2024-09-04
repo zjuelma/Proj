@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 00:22:02 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 13:53:12 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -20,9 +20,9 @@ line level    source
   10          #include "main.h"
 *** WARNING C318 IN LINE 2 OF main.h: can't open file 'intrin.h'
   11          
-  12          int Temp;
+  12          int Temp; // temperature
   13          
-  14          sbit SW = P1 ^ 2;
+  14          sbit SW = P1 ^ 2; // switch
   15          
   16          /*
   17              @author hushmoon
@@ -46,40 +46,49 @@ line level    source
   35          void Get_Temperature(void)
   36          {
   37   1          LCD_Display_Char(5, 0, ' ');
-  38   1          LCD_Display_Char(6, 0, Temp / 10000 % 10 + 0x30);
-  39   1          LCD_Display_Char(7, 0, Temp / 1000 % 10 + 0x30);
-  40   1          LCD_Display_Char(8, 0, Temp / 100 % 10 + 0x30);
-  41   1          LCD_Display_Char(10, 0, Temp / 10 % 10 + 0x30);
-  42   1          LCD_Display_Char(11, 0, Temp % 10 + 0x30);
+  38   1          LCD_Display_Char(6, 0, Temp / 10000 % 10 + 0x30); // the hundreds
+  39   1          LCD_Display_Char(7, 0, Temp / 1000 % 10 + 0x30);  // the tens
+  40   1          LCD_Display_Char(8, 0, Temp / 100 % 10 + 0x30);   // the units
+  41   1          LCD_Display_Char(10, 0, Temp / 10 % 10 + 0x30);   // the decimal
+  42   1          LCD_Display_Char(11, 0, Temp % 10 + 0x30);        // the fractional
   43   1      }
   44          
   45          void main(void)
   46          {
-  47   1          DelayMs(100);
-  48   1          LCD_Init();
-  49   1          Display_Main();
-  50   1          while (1) {
-  51   2              if (SW == 0) {
-  52   3                  DelayMs(20);
-  53   3                  if (SW == 0) {
-C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 00:22:02 PAGE 2   
+  47   1          int i;
+  48   1          long Temp_sum;
+  49   1          DelayMs(100);   // waiting for the chip to be ready
+  50   1          LCD_Init();     // initialize the LCD
+  51   1          Display_Main(); // display the main interface
+  52   1          while (1) {
+  53   2              if (SW == 0) {   // if the switch is pressed
+C51 COMPILER V9.60.7.0   MAIN                                                              09/04/2024 13:53:12 PAGE 2   
 
-  54   4                      Temp = Convert_T();
-  55   4                      Get_Temperature();
-  56   4                  }
-  57   3              }
-  58   2              while (SW == 0);
-  59   2              DelayMs(20);
-  60   2          }
-  61   1      }
+  54   3                  DelayMs(20); // debounce
+  55   3                  if (SW == 0) {
+  56   4                      Temp_sum = 0;
+  57   4      
+  58   4                      for (i = 0; i < 256; i++) {
+  59   5                          Temp_sum += Convert_T();
+  60   5                          DelayMs(1);
+  61   5                      }
+  62   4      
+  63   4                      Temp = Temp_sum / 256;
+  64   4                      Get_Temperature(); // get the temperature and display it
+  65   4                  }
+  66   3              }
+  67   2              while (SW == 0); // waiting for the switch to be released
+  68   2              DelayMs(20);
+  69   2          }
+  70   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    219    ----
+   CODE SIZE        =    299    ----
    CONSTANT SIZE    =     15    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2    ----
+   DATA SIZE        =      2       6
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

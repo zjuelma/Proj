@@ -4,7 +4,7 @@
  AKIE NO HAJIME
 */
 #include "MLX90614.h"
-
+#define COMPENSATION 1.045 // compensation factor
 bdata uchar flag;
 sbit bit_out = flag ^ 7;
 sbit bit_in  = flag ^ 0;
@@ -186,6 +186,6 @@ int Convert_T(void)
 {
     int temp, T;
     temp = Read_T();
-    T    = ((float)temp * 0.02f - 273.15f) * 100;
+    T    = ((float)temp * 0.02f - 273.15f) * 100 * COMPENSATION;
     return T;
 }

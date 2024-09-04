@@ -44,6 +44,8 @@ void Get_Temperature(void)
 
 void main(void)
 {
+    int i;
+    long Temp_sum;
     DelayMs(100);   // waiting for the chip to be ready
     LCD_Init();     // initialize the LCD
     Display_Main(); // display the main interface
@@ -51,7 +53,14 @@ void main(void)
         if (SW == 0) {   // if the switch is pressed
             DelayMs(20); // debounce
             if (SW == 0) {
-                Temp = Convert_T();
+                Temp_sum = 0;
+
+                for (i = 0; i < 256; i++) {
+                    Temp_sum += Convert_T();
+                    DelayMs(1);
+                }
+
+                Temp = Temp_sum / 256;
                 Get_Temperature(); // get the temperature and display it
             }
         }
