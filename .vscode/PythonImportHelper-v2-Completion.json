@@ -1,0 +1,55 @@
+[
+    {
+        "label": "stats",
+        "importPath": "scipy",
+        "description": "scipy",
+        "isExtraImport": true,
+        "detail": "scipy",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "file_path",
+        "kind": 5,
+        "importPath": "LinearRegression_Temp.LinearRegression_Temp",
+        "description": "LinearRegression_Temp.LinearRegression_Temp",
+        "peekOfCode": "file_path = 'data.xlsx'\ndf = pd.read_excel(file_path)\nx_data = df.iloc[:, 0].values\ny_data = df.iloc[:, 1].values\nslope, intercept, r_value, p_value, std_err = stats.linregress(x_data, y_data)\nprint(f\"LinearFittingFormula: y = {slope:.4f} * x + {intercept:.4f}\")\nprint(x_data)\nprint(y_data)",
+        "detail": "LinearRegression_Temp.LinearRegression_Temp",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "LinearRegression_Temp.LinearRegression_Temp",
+        "description": "LinearRegression_Temp.LinearRegression_Temp",
+        "peekOfCode": "df = pd.read_excel(file_path)\nx_data = df.iloc[:, 0].values\ny_data = df.iloc[:, 1].values\nslope, intercept, r_value, p_value, std_err = stats.linregress(x_data, y_data)\nprint(f\"LinearFittingFormula: y = {slope:.4f} * x + {intercept:.4f}\")\nprint(x_data)\nprint(y_data)",
+        "detail": "LinearRegression_Temp.LinearRegression_Temp",
+        "documentation": {}
+    },
+    {
+        "label": "x_data",
+        "kind": 5,
+        "importPath": "LinearRegression_Temp.LinearRegression_Temp",
+        "description": "LinearRegression_Temp.LinearRegression_Temp",
+        "peekOfCode": "x_data = df.iloc[:, 0].values\ny_data = df.iloc[:, 1].values\nslope, intercept, r_value, p_value, std_err = stats.linregress(x_data, y_data)\nprint(f\"LinearFittingFormula: y = {slope:.4f} * x + {intercept:.4f}\")\nprint(x_data)\nprint(y_data)",
+        "detail": "LinearRegression_Temp.LinearRegression_Temp",
+        "documentation": {}
+    },
+    {
+        "label": "y_data",
+        "kind": 5,
+        "importPath": "LinearRegression_Temp.LinearRegression_Temp",
+        "description": "LinearRegression_Temp.LinearRegression_Temp",
+        "peekOfCode": "y_data = df.iloc[:, 1].values\nslope, intercept, r_value, p_value, std_err = stats.linregress(x_data, y_data)\nprint(f\"LinearFittingFormula: y = {slope:.4f} * x + {intercept:.4f}\")\nprint(x_data)\nprint(y_data)",
+        "detail": "LinearRegression_Temp.LinearRegression_Temp",
+        "documentation": {}
+    }
+]
